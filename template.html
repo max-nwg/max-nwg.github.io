@@ -133,10 +133,20 @@
             z-index: 2;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
         }
-        .desc-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
-        .desc-text { font-size: 1rem; color: var(--text-primary); }
+        .desc-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            text-align: left;
+        }
+        .desc-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            text-align: left;
+        }
         .lca-card img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
         .lca-label { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
         .lca-value { font-size: 1rem; color: var(--text-primary); font-weight: 500; }
@@ -195,11 +205,23 @@
                     <div class="desc-care-scroll">
                         <div class="desc-care-card">
                             <div class="desc-title">Product Details</div>
-                            <div class="product-details-inline" style="display:flex;gap:1.5rem;justify-content:center;align-items:center;">
-                                <div><span class="detail-label">Color:</span> <span class="detail-value">[product_color]</span></div>
-                                <div><span class="detail-label">Size:</span> <span class="detail-value">[product_sizes]</span></div>
-                                <div><span class="detail-label">HS Code:</span> <span class="detail-value">[product_htscode]</span></div>
-                                <div><span class="detail-label">EAN Code:</span> <span class="detail-value">[ean_code]</span></div>
+                            <div class="product-details-inline" style="display:flex;flex-direction:column;gap:0.5rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">Color:</span>
+                                    <span class="detail-value" style="text-align:right;">[product_color]</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">Size:</span>
+                                    <span class="detail-value" style="text-align:right;">[product_sizes]</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">HS Code:</span>
+                                    <span class="detail-value" style="text-align:right;">[product_htscode]</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">[ean_code]</span>
+                                </div>
                             </div>
                         </div>
                         <div class="desc-care-card">
@@ -208,8 +230,10 @@
                         </div>
                         <div class="desc-care-card">
                             <div class="desc-title">Care Instructions</div>
-                            <img src="public/care_icon.png" alt="Care Instructions" style="width:32px;height:32px;display:block;margin:0 auto 0.5rem auto;">
-                            <div class="desc-text">[care_instructions]</div>
+                            <div style="display:flex;align-items:center;gap:0.5rem;">
+                                <img src="public/care_icon.png" alt="Care Instructions" style="width:24px;height:24px;display:inline-block;">
+                                <div class="desc-text" style="text-align:left;">[care_instructions]</div>
+                            </div>
                         </div>
                     </div>
                 </div>
