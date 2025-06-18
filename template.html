@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product Passport for [product_name] - Detailed supply chain and sustainability information">
+    <title>Product Passport - [product_name]</title>
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #34495E;
+            --accent: #E67E22;
+            --bg-color: #fff;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --border-color: #ECF0F1;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 2px 4px rgba(0,0,0,0.05);
+            --radius: 0.5rem;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+        .container {
+            width: 100vw;
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        @media (min-width: 768px) {
+            .container {
+                max-width: 48rem;
+                margin: 0 auto;
+                padding: 1rem;
+            }
+        }
+        .section, .product-section {
+            background: none !important;
+            border-radius: 0;
+            margin: 0;
+            padding: 0.15rem 0 0.15rem 0;
+            border: none;
+            border-top: 1px solid var(--border-color);
+        }
+        .section:first-child, .product-section:first-child { border-top: none; }
+        @media (min-width: 768px) {
+            .section, .product-section {
+                border-radius: var(--radius);
+                margin: initial;
+                padding: 0.5rem;
+                background: var(--bg-color);
+                border: 1px solid var(--border-color);
+                border-top: 1px solid var(--border-color);
+            }
+        }
+        .section-header, .section-content-inner, .product-section .product-info, .product-section .product-image-container {
+            padding: 0.15rem 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .section-header, .section-content-inner, .product-section .product-info, .product-section .product-image-container {
+                padding: 1rem 1.5rem;
+            }
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-color) !important;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius);
+            margin: 0.25rem 0;
+            color: var(--text-primary);
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section-header h2 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin: 0;
+        }
+        .toggle-icon {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: auto;
+            color: var(--text-secondary);
+            user-select: none;
+        }
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s;
+        }
+        .section-content.active { max-height: 2000px; }
+        /* Flippable/Scrollable Cards (shared) */
+        .product-details-scroll, .materials-scroll, .lca-scroll, .desc-care-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0.5rem 0.5rem 1rem;
+            scroll-snap-type: x mandatory;
+            position: relative;
+            scroll-padding-left: 1rem;
+            scroll-padding-right: 1rem;
+        }
+        .product-details-scroll > *:last-child,
+        .materials-scroll > *:last-child,
+        .lca-scroll > *:last-child,
+        .desc-care-scroll > *:last-child { margin-right: 0; }
+        .detail-card, .material-card, .lca-card, .desc-care-card {
+            min-width: 60vw;
+            max-width: 220px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 0.75rem 1rem;
+            flex: 0 0 auto;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-right: 1rem;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .desc-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .desc-text { font-size: 1rem; color: var(--text-primary); }
+        .lca-card img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
+        .lca-label { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
+        .lca-value { font-size: 1rem; color: var(--text-primary); font-weight: 500; }
+        .product-section .product-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .product-section .product-image { width: 100%; max-width: 400px; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .product-icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
+        @media (min-width: 480px) { .product-icons { grid-template-columns: repeat(4, 1fr); } }
+        .icon-container { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .icon-container img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
+        .icon-label { font-size: 0.875rem; color: var(--text-secondary); }
+        .map-container { height: 300px; border-radius: var(--radius); margin: 1rem 0; border: 1px solid var(--border-color); }
+        .detail-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+        @media (min-width: 480px) { .detail-grid { grid-template-columns: repeat(2, 1fr); } }
+        .detail-item { padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
+        .detail-label { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+        .detail-value { color: var(--text-primary); font-weight: 400; }
+        .purchase-order-bar { color: var(--text-primary); font-weight: 600; border-radius: var(--radius); padding: 0.75rem 1rem; margin: 1rem 0 1.25rem 0; text-align: center; font-size: 1.1rem; border: 1px solid var(--border-color); background: var(--bg-color); }
+        .supply-chain-steps-vertical { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.25rem; }
+        .supply-chain-step-vertical { display: flex; align-items: flex-start; background: var(--bg-color) !important; box-shadow: var(--shadow-sm); border-radius: var(--radius); padding: 0.75rem 1rem; gap: 1rem; margin: 0.25rem 0; }
+        .step-icon-square { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 0.5rem; flex-shrink: 0; }
+        .step-icon-square img { width: 32px; height: 32px; object-fit: contain; }
+        .step-info-vertical { display: flex; flex-direction: column; justify-content: center; }
+        .certification-squares { display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
+        .cert-square { background: var(--bg-color); border-radius: 0.5rem; padding: 0.5rem; display: flex; align-items: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); width: 48px; height: 48px; justify-content: center; }
+        .cert-square img { height: 32px; width: 32px; object-fit: contain; display: block; }
+        .cert-link a { color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 0.5rem; font-size: 1rem; }
+        .cert-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-image-container">
+                <img src="public/product_image.png" alt="[product_name]" class="product-image">
+            </div>
+            <div class="product-info">
+                <h1 class="product-title">[product_name]</h1>
+                <div class="product-details-scroll">
+                    <div class="detail-card">
+                        <div class="detail-label">Color</div>
+                        <div class="detail-value">[product_color]</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-label">Size</div>
+                        <div class="detail-value">[product_sizes]</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-label">HS Code</div>
+                        <div class="detail-value">[product_htscode]</div>
+                    </div>
+                    <div class="detail-card">
+                        <div class="detail-label">EAN Code</div>
+                        <div class="detail-value">[ean_code]</div>
+                    </div>
+                </div>
+                <div class="product-icons">
+                    <div class="icon-container">
+                        <img src="public/product_material_cert_1.png" alt="Product Certification 1">
+                        <span class="icon-label">Certification 1</span>
+                    </div>
+                    <div class="icon-container">
+                        <img src="public/product_material_cert_2.png" alt="Product Certification 2">
+                        <span class="icon-label">Certification 2</span>
+                    </div>
+                    <div class="icon-container">
+                        <img src="public/product_material_cert_3.png" alt="Product Certification 3">
+                        <span class="icon-label">Certification 3</span>
+                    </div>
+                    <div class="icon-container">
+                        <img src="public/product_material_cert_4.png" alt="Product Certification 4">
+                        <span class="icon-label">Certification 4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Description -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Product Description & Care</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-care-scroll">
+                        <div class="desc-care-card">
+                            <div class="desc-title">Product Description</div>
+                            <div class="desc-text">[product_text]</div>
+                        </div>
+                        <div class="desc-care-card">
+                            <div class="desc-title">Care Instructions</div>
+                            <div class="care-icon" style="margin-bottom:0.5rem;">
+                                <img src="public/care_icon.png" alt="Care Instructions" style="width:32px;height:32px;">
+                            </div>
+                            <div class="desc-text">[care_instructions]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Material Information -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Material Information</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="material-header">
+                                <h3 class="material-title">[material1_material_type]</h3>
+                                <span class="material-percentage">[material1_percentage]</span>
+                            </div>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Placement</div>
+                                    <div class="detail-value">[material1_placement]</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Composition</div>
+                                    <div class="detail-value">[material1_composition]</div>
+                                </div>
+                            </div>
+                            <div class="material-icons">
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
+                                    <span class="icon-label">Product Material Cert 1</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
+                                    <span class="icon-label">Product Material Cert 2</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
+                                    <span class="icon-label">Product Material Cert 3</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
+                                    <span class="icon-label">Product Material Cert 4</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="material-card">
+                            <div class="material-header">
+                                <h3 class="material-title">[material2_material_type]</h3>
+                                <span class="material-percentage">[material2_percentage]</span>
+                            </div>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Placement</div>
+                                    <div class="detail-value">[material2_placement]</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Composition</div>
+                                    <div class="detail-value">[material2_composition]</div>
+                                </div>
+                            </div>
+                            <div class="material-icons">
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
+                                    <span class="icon-label">Product Material Cert 1</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
+                                    <span class="icon-label">Product Material Cert 2</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
+                                    <span class="icon-label">Product Material Cert 3</span>
+                                </div>
+                                <div class="icon-container">
+                                    <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
+                                    <span class="icon-label">Product Material Cert 4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supply Chain - Transparency -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Supply Chain - Transparency</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-section">
+                        <div class="map-container" id="map"></div>
+                        <div class="purchase-order-bar">
+                            Purchase Order: <b>[purchase_order]</b>
+                        </div>
+                        <div class="supply-chain-steps-vertical">
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="public/supply_chain_icon_1.png" alt="Garment Production"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">GARMENT PRODUCTION</div>
+                                    <div class="step-detail">[product_factory]<br>[product_factory_country]</div>
+                                </div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="public/supply_chain_icon_2.png" alt="Fabric Production"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">FABRIC PRODUCTION</div>
+                                    <div class="step-detail">[material1_fabric_tier2]</div>
+                                </div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="public/supply_chain_icon_3.png" alt="Yarn Production"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">YARN PRODUCTION</div>
+                                    <div class="step-detail">[material1_yarn_tier3]</div>
+                                </div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="step-icon-square"><img src="public/supply_chain_icon_4.png" alt="Raw Material"></div>
+                                <div class="step-info-vertical">
+                                    <div class="step-label">RAW MATERIAL</div>
+                                    <div class="step-detail">[material1_raw_tier4]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="certification-squares">
+                            <span class="cert-square"><img src="public/supply_chain_cert_1.png" alt="Cert 1"></span>
+                            <span class="cert-square"><img src="public/supply_chain_cert_2.png" alt="Cert 2"></span>
+                            <span class="cert-square"><img src="public/supply_chain_cert_3.png" alt="Cert 3"></span>
+                            <span class="cert-link"><a href="public/certification.pdf" target="_blank">Click to view certificates</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Cycle Assessment -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Life Cycle Assessment</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="lca-section">
+                        <div class="lca-icons">
+                            <div class="icon-container">
+                                <img src="public/lca_icon_1.png" alt="LCA Icon 1">
+                                <span class="icon-label">LCA 1</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="public/lca_icon_2.png" alt="LCA Icon 2">
+                                <span class="icon-label">LCA 2</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="public/lca_icon_3.png" alt="LCA Icon 3">
+                                <span class="icon-label">LCA 3</span>
+                            </div>
+                            <div class="icon-container">
+                                <img src="public/lca_icon_4.png" alt="LCA Icon 4">
+                                <span class="icon-label">LCA 4</span>
+                            </div>
+                        </div>
+                        <div class="lca-scroll">
+                            <div class="lca-card">
+                                <img src="public/lca_icon_1.png" alt="LCA Icon 1">
+                                <div class="lca-label">Carbon Emission</div>
+                                <div class="lca-value">[lca_carbon_emission]</div>
+                            </div>
+                            <div class="lca-card">
+                                <img src="public/lca_icon_2.png" alt="LCA Icon 2">
+                                <div class="lca-label">Water Use</div>
+                                <div class="lca-value">[lca_water_use]</div>
+                            </div>
+                            <div class="lca-card">
+                                <img src="public/lca_icon_3.png" alt="LCA Icon 3">
+                                <div class="lca-label">Energy Consumption</div>
+                                <div class="lca-value">[lca_energy_consumption]</div>
+                            </div>
+                            <div class="lca-card">
+                                <img src="public/lca_icon_4.png" alt="LCA Icon 4">
+                                <div class="lca-label">Other</div>
+                                <div class="lca-value"></div>
+                            </div>
+                        </div>
+                        <p class="lca-disclaimer">[lca_disclaimer]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repairability -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Repairability</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <p>[repairability]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- End of Life -->
+        <section class="section">
+            <div class="section-header">
+                <h2>End of Life</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <p>[end_of_life]</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize map
+        document.addEventListener('DOMContentLoaded', function() {
+            const map = L.map('map').setView([0, 0], 2);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        });
+
+        // Section toggle functionality
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                content.classList.toggle('active');
+                const icon = header.querySelector('.toggle-icon');
+                if (content.classList.contains('active')) {
+                    icon.textContent = '−';
+                } else {
+                    icon.textContent = '+';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
