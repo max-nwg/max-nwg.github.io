@@ -223,6 +223,13 @@
             flex: 0 0 auto;
             object-fit: contain;
         }
+        .lca-list-icon {
+            height: 64px;
+            max-height: 64px;
+            width: auto;
+            max-width: 100px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -418,24 +425,24 @@
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="lca-section">
-                        <div class="lca-kv-row" style="display:flex;gap:2rem;align-items:center;justify-content:flex-start;flex-wrap:wrap;">
-                            <div style="display:flex;align-items:center;gap:0.5rem;">
-                                <img src="public/lca_icon_1.png" alt="LCA Icon 1" style="height:32px;width:auto;">
+                        <ul class="lca-kv-list" style="display:flex;gap:2rem;align-items:center;justify-content:flex-start;flex-wrap:wrap;list-style:none;padding:0;margin:0;">
+                            <li style="display:flex;align-items:center;gap:0.5rem;">
+                                <img src="public/lca_icon_1.png" alt="LCA Icon 1" class="lca-list-icon">
                                 <span class="lca-value">[lca_carbon_emission]</span>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:0.5rem;">
-                                <img src="public/lca_icon_2.png" alt="LCA Icon 2" style="height:32px;width:auto;">
+                            </li>
+                            <li style="display:flex;align-items:center;gap:0.5rem;">
+                                <img src="public/lca_icon_2.png" alt="LCA Icon 2" class="lca-list-icon">
                                 <span class="lca-value">[lca_water_use]</span>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:0.5rem;">
-                                <img src="public/lca_icon_3.png" alt="LCA Icon 3" style="height:32px;width:auto;">
+                            </li>
+                            <li style="display:flex;align-items:center;gap:0.5rem;">
+                                <img src="public/lca_icon_3.png" alt="LCA Icon 3" class="lca-list-icon">
                                 <span class="lca-value">[lca_energy_consumption]</span>
-                            </div>
-                            <div style="display:flex;align-items:center;gap:0.5rem;">
-                                <img src="public/lca_icon_4.png" alt="LCA Icon 4" style="height:32px;width:auto;">
+                            </li>
+                            <li style="display:flex;align-items:center;gap:0.5rem;">
+                                <img src="public/lca_icon_4.png" alt="LCA Icon 4" class="lca-list-icon">
                                 <span class="lca-value">[lca_pet_bottles]</span>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                         <p class="lca-disclaimer">[lca_disclaimer]</p>
                     </div>
                 </div>
