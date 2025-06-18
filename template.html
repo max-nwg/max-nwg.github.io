@@ -511,7 +511,7 @@
                 }
             ];
             
-            const map = L.map('map', { zoomControl: false }).setView([27, 82.5], 4);
+            const map = L.map('map', { zoomControl: false }).setView([27, 82.5], 5);
             
             // Modern map tiles
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -578,21 +578,6 @@
                     });
             });
             
-            // Add legend
-            const legend = L.control({ position: 'bottomright' });
-            legend.onAdd = function() {
-                const div = L.DomUtil.create('div', 'legend');
-                div.innerHTML = `
-                    <h4>Supply Chain Tiers</h4>
-                    <div><img src="public/supply_chain_icon_1.png" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;"> Garment Production</div>
-                    <div><img src="public/supply_chain_icon_2.png" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;"> Fabric Production</div>
-                    <div><img src="public/supply_chain_icon_3.png" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;"> Yarn Production</div>
-                    <div><img src="public/supply_chain_icon_4.png" style="width:20px;height:20px;margin-right:6px;vertical-align:middle;"> Raw Material</div>
-                `;
-                return div;
-            };
-            legend.addTo(map);
-            
             // Add styles
             const style = document.createElement('style');
             style.textContent = `
@@ -608,19 +593,6 @@
                 }
                 .custom-popup .leaflet-popup-tip {
                     background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
-                .legend {
-                    background: white; padding: 8px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                    font-size: 11px; line-height: 1.3;
-                }
-                .legend h4 { margin: 0 0 6px 0; font-size: 12px; font-weight: 500; }
-                .legend div { margin-bottom: 3px; }
-                @media (max-width: 768px) {
-                    .legend {
-                        padding: 6px; font-size: 10px;
-                    }
-                    .legend h4 { font-size: 11px; margin-bottom: 4px; }
-                    .legend div { margin-bottom: 2px; }
                 }
             `;
             document.head.appendChild(style);
