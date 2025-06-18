@@ -278,6 +278,10 @@
                                     <span class="detail-label" style="text-align:left;">EAN Code:</span>
                                     <span class="detail-value" style="text-align:right;">[ean_code]</span>
                                 </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-label" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:right;">[purchase_order]</span>
+                                </div>
                             </div>
                         </div>
                         <div class="desc-care-card">
@@ -364,45 +368,34 @@
                 <div class="section-content-inner">
                     <div class="supply-chain-section">
                         <div class="map-container" id="map"></div>
-                        <div class="purchase-order-bar">
-                            Purchase Order: <b>[purchase_order]</b>
-                        </div>
                         <div class="supply-chain-steps-vertical">
                             <div class="supply-chain-step-vertical">
-                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_1.png" alt="Garment Production" style="height:32px;width:auto;">
-                                    <span class="step-label">GARMENT PRODUCTION</span>
-                                </span>
-                                <div class="step-info-vertical">
-                                    <div class="step-detail">[product_factory]<br>[product_factory_country]</div>
+                                    <span>Garment Production</span>
                                 </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[product_factory]</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_2.png" alt="Fabric Production" style="height:32px;width:auto;">
-                                    <span class="step-label">FABRIC PRODUCTION</span>
-                                </span>
-                                <div class="step-info-vertical">
-                                    <div class="step-detail">[material1_fabric_tier2]</div>
+                                    <span>Fabric Production</span>
                                 </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[material1_fabric_tier2]</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_3.png" alt="Yarn Production" style="height:32px;width:auto;">
-                                    <span class="step-label">YARN PRODUCTION</span>
-                                </span>
-                                <div class="step-info-vertical">
-                                    <div class="step-detail">[material1_yarn_tier3]</div>
+                                    <span>Yarn Production</span>
                                 </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[material1_yarn_tier3]</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_4.png" alt="Raw Material" style="height:32px;width:auto;">
-                                    <span class="step-label">RAW MATERIAL</span>
-                                </span>
-                                <div class="step-info-vertical">
-                                    <div class="step-detail">[material1_raw_tier4]</div>
+                                    <span>Raw Material</span>
                                 </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[material1_raw_tier4]</div>
                             </div>
                         </div>
                         <div class="certification-squares inline-icons-row" style="margin-top:1.5rem;justify-content:center;">
