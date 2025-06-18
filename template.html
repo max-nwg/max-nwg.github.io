@@ -532,9 +532,9 @@
                     
                     L.marker([midLat, midLon], {
                         icon: L.divIcon({
-                            html: `<div style="background:white;padding:4px 8px;border-radius:4px;font-size:12px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.1);">${distance} km</div>`,
-                            iconSize: [100, 20],
-                            iconAnchor: [50, 10]
+                            html: `<div style="background:white;padding:3px 6px;border-radius:3px;font-size:11px;font-weight:500;box-shadow:0 2px 4px rgba(0,0,0,0.1);white-space:nowrap;overflow:hidden;text-align:center;">${distance} km</div>`,
+                            iconSize: [60, 25],
+                            iconAnchor: [30, 12]
                         })
                     }).addTo(map);
                 }
