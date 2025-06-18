@@ -191,7 +191,7 @@
         .detail-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
         @media (min-width: 480px) { .detail-grid { grid-template-columns: repeat(2, 1fr); } }
         .detail-item { padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
-        .detail-label { color: var(--text-secondary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
+        .detail-label { color: var(--text-primary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
         .detail-value { color: var(--text-primary); font-weight: 400; }
         .purchase-order-bar { color: var(--text-primary); font-weight: 600; border-radius: var(--radius); padding: 0.75rem 1rem; margin: 1rem 0 1.25rem 0; text-align: center; font-size: 1.1rem; border: 1px solid var(--border-color); background: var(--bg-color); }
         .supply-chain-steps-vertical { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
@@ -263,23 +263,23 @@
                             <div class="desc-title">Product Details</div>
                             <div class="product-details-inline" style="display:flex;flex-direction:column;gap:0.5rem;">
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Color:</span>
+                                    <span class="detail-value" style="text-align:left;">Color:</span>
                                     <span class="detail-value" style="text-align:right;">[product_color]</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Size:</span>
+                                    <span class="detail-value" style="text-align:left;">Size:</span>
                                     <span class="detail-value" style="text-align:right;">[product_sizes]</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">HS Code:</span>
+                                    <span class="detail-value" style="text-align:left;">HS Code:</span>
                                     <span class="detail-value" style="text-align:right;">[product_htscode]</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
                                     <span class="detail-value" style="text-align:right;">[ean_code]</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
                                     <span class="detail-value" style="text-align:right;">[purchase_order]</span>
                                 </div>
                             </div>
@@ -310,19 +310,12 @@
                 <div class="section-content-inner">
                     <div class="materials-scroll">
                         <div class="material-card">
-                            <div class="material-header">
-                                <h3 class="material-title">[material1_material_type]</h3>
-                                <span class="material-percentage">[material1_percentage]</span>
+                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                                <span class="detail-value" style="text-align:left;">[material1_percentage]</span>
+                                <span class="detail-value" style="text-align:right;">[material1_placement]</span>
                             </div>
-                            <div class="material-kv-pairs" style="display:flex;flex-direction:column;gap:0.5rem;">
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Placement:</span>
-                                    <span class="detail-value" style="text-align:right;">[material1_placement]</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Composition:</span>
-                                    <span class="detail-value" style="text-align:right;">[material1_composition]</span>
-                                </div>
+                            <div style="margin-top:1rem;">
+                                <div class="desc-text">[material1_composition]</div>
                             </div>
                             <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
                                 <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
@@ -332,19 +325,12 @@
                             </div>
                         </div>
                         <div class="material-card">
-                            <div class="material-header">
-                                <h3 class="material-title">[material2_material_type]</h3>
-                                <span class="material-percentage">[material2_percentage]</span>
+                            <div style="display:flex;justify-content:space-between;align-items:center;">
+                                <span class="detail-value" style="text-align:left;">[material2_percentage]</span>
+                                <span class="detail-value" style="text-align:right;">[material2_placement]</span>
                             </div>
-                            <div class="material-kv-pairs" style="display:flex;flex-direction:column;gap:0.5rem;">
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Placement:</span>
-                                    <span class="detail-value" style="text-align:right;">[material2_placement]</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-label" style="text-align:left;">Composition:</span>
-                                    <span class="detail-value" style="text-align:right;">[material2_composition]</span>
-                                </div>
+                            <div style="margin-top:1rem;">
+                                <div class="desc-text">[material2_composition]</div>
                             </div>
                             <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
                                 <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
