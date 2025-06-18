@@ -174,6 +174,20 @@
         .cert-square img { height: 32px; width: 32px; object-fit: contain; display: block; }
         .cert-link a { color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 0.5rem; font-size: 1rem; }
         .cert-link a:hover { text-decoration: underline; }
+        .inline-icons-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
+        .inline-icons-row img {
+            width: 80%;
+            max-width: 32px;
+            height: auto;
+            flex: 1 1 0;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -186,11 +200,11 @@
             <div class="product-image-container">
                 <img src="public/product_image.png" alt="[product_name]" class="product-image">
             </div>
-            <div class="product-certifications" style="display:flex;gap:0.5rem;align-items:center;justify-content:center;margin:0.5rem 0;">
-                <img src="public/product_material_cert_1.png" alt="Product Certification 1" style="height:32px;width:auto;">
-                <img src="public/product_material_cert_2.png" alt="Product Certification 2" style="height:32px;width:auto;">
-                <img src="public/product_material_cert_3.png" alt="Product Certification 3" style="height:32px;width:auto;">
-                <img src="public/product_material_cert_4.png" alt="Product Certification 4" style="height:32px;width:auto;">
+            <div class="product-certifications inline-icons-row" style="margin:0.5rem 0;">
+                <img src="public/product_material_cert_1.png" alt="Product Certification 1">
+                <img src="public/product_material_cert_2.png" alt="Product Certification 2">
+                <img src="public/product_material_cert_3.png" alt="Product Certification 3">
+                <img src="public/product_material_cert_4.png" alt="Product Certification 4">
             </div>
         </section>
 
@@ -264,11 +278,11 @@
                                     <div class="detail-value">[material1_composition]</div>
                                 </div>
                             </div>
-                            <div class="material-icons" style="display:flex;gap:0.5rem;align-items:center;justify-content:flex-start;margin:0.5rem 0;">
-                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1" style="height:32px;width:auto;">
-                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2" style="height:32px;width:auto;">
-                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3" style="height:32px;width:auto;">
-                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4" style="height:32px;width:auto;">
+                            <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
+                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
+                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
+                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
+                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
                             </div>
                         </div>
                         <div class="material-card">
@@ -286,11 +300,11 @@
                                     <div class="detail-value">[material2_composition]</div>
                                 </div>
                             </div>
-                            <div class="material-icons" style="display:flex;gap:0.5rem;align-items:center;justify-content:flex-start;margin:0.5rem 0;">
-                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1" style="height:32px;width:auto;">
-                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2" style="height:32px;width:auto;">
-                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3" style="height:32px;width:auto;">
-                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4" style="height:32px;width:auto;">
+                            <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
+                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
+                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
+                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
+                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
                             </div>
                         </div>
                     </div>
@@ -349,10 +363,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="certification-squares" style="display:flex;gap:0.5rem;align-items:center;justify-content:center;margin-top:1.5rem;">
-                            <img src="public/supply_chain_cert_1.png" alt="Cert 1" style="height:32px;width:auto;">
-                            <img src="public/supply_chain_cert_2.png" alt="Cert 2" style="height:32px;width:auto;">
-                            <img src="public/supply_chain_cert_3.png" alt="Cert 3" style="height:32px;width:auto;">
+                        <div class="certification-squares inline-icons-row" style="margin-top:1.5rem;justify-content:center;">
+                            <img src="public/supply_chain_cert_1.png" alt="Cert 1">
+                            <img src="public/supply_chain_cert_2.png" alt="Cert 2">
+                            <img src="public/supply_chain_cert_3.png" alt="Cert 3">
                             <span class="cert-link"><a href="public/certification.pdf" target="_blank">Click to view certificates</a></span>
                         </div>
                     </div>
@@ -454,4 +468,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
