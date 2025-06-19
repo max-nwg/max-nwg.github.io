@@ -41,6 +41,18 @@
                 margin: 0 auto;
                 padding: 1rem;
             }
+            .product-image-container {
+                align-items: center !important;
+            }
+            .product-image {
+                align-self: center !important;
+            }
+            .product-image-container > div {
+                text-align: center !important;
+            }
+            .product-certifications {
+                justify-content: center !important;
+            }
         }
         @media (min-width: 900px) {
             .container {
@@ -50,6 +62,15 @@
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
+            }
+            .product-image-container {
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 2rem !important;
+            }
+            .product-image {
+                flex: 0 0 auto;
+                margin: 0 !important;
             }
             .detail-card, .material-card, .lca-card, .desc-care-card {
                 min-width: 320px;
@@ -239,18 +260,20 @@
             <div class="product-info" style="margin-bottom:0.5rem;">
                 <h1 class="product-title">[product_name]</h1>
             </div>
-            <div class="product-image-container">
-                <img src="public/product_image.png" alt="[product_name]" class="product-image">
-                <div style="text-align:center;margin-top:1rem;">
-                    <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;color:var(--text-primary);">[product_name_full]</h2>
-                    <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">[product_description_short]</p>
+            <div class="product-image-container" style="display:flex;flex-direction:column;align-items:flex-start;gap:1rem;">
+                <img src="public/product_image.png" alt="[product_name]" class="product-image" style="align-self:flex-start;">
+                <div style="display:flex;flex-direction:column;align-items:flex-start;gap:1rem;">
+                    <div style="text-align:left;">
+                        <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;color:var(--text-primary);">[product_name_full]</h2>
+                        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">[product_description_short]</p>
+                    </div>
+                    <div class="product-certifications inline-icons-row" style="margin:0.5rem 0;justify-content:flex-start;">
+                        <img src="public/product_material_cert_1.png" alt="Product Certification 1">
+                        <img src="public/product_material_cert_2.png" alt="Product Certification 2">
+                        <img src="public/product_material_cert_3.png" alt="Product Certification 3">
+                        <img src="public/product_material_cert_4.png" alt="Product Certification 4">
+                    </div>
                 </div>
-            </div>
-            <div class="product-certifications inline-icons-row" style="margin:0.5rem 0;">
-                <img src="public/product_material_cert_1.png" alt="Product Certification 1">
-                <img src="public/product_material_cert_2.png" alt="Product Certification 2">
-                <img src="public/product_material_cert_3.png" alt="Product Certification 3">
-                <img src="public/product_material_cert_4.png" alt="Product Certification 4">
             </div>
         </section>
 
