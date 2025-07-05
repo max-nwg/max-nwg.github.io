@@ -224,6 +224,12 @@
         .step-icon-square { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 0.5rem; flex-shrink: 0; }
         .step-icon-square img { width: 32px; height: 32px; object-fit: contain; }
         .step-info-vertical { display: flex; flex-direction: column; justify-content: center; }
+        .supply-chain-step-vertical .detail-label { 
+            display: flex; 
+            align-items: center; 
+            min-height: 40px; 
+            gap: 0.5rem; 
+        }
         .certification-squares { display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
         .cert-square { background: var(--bg-color); border-radius: 0.5rem; padding: 0.5rem; display: flex; align-items: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); width: 48px; height: 48px; justify-content: center; }
         .cert-square img { height: 32px; width: 32px; object-fit: contain; display: block; }
@@ -384,28 +390,28 @@
                         <div class="map-container" id="map"></div>
                         <div class="supply-chain-steps-vertical">
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label">
                                     <img src="public/supply_chain_icon_1.png" alt="Garment Production" style="height:40px;width:auto;">
                                     <span>Garment Production</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;display:block;width:100%;">{{product_factory}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label">
                                     <img src="public/supply_chain_icon_2.png" alt="Fabric Production" style="height:40px;width:auto;">
                                     <span>Fabric Production</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;display:block;width:100%;">{{material1_fabric_tier2}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label">
                                     <img src="public/supply_chain_icon_3.png" alt="Yarn Production" style="height:40px;width:auto;">
                                     <span>Yarn Production</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;display:block;width:100%;">{{material1_yarn_tier3}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                <div class="detail-label">
                                     <img src="public/supply_chain_icon_4.png" alt="Raw Material" style="height:40px;width:auto;">
                                     <span>Raw Material</span>
                                 </div>
@@ -592,7 +598,7 @@
                             productData = {};
                             headers.forEach((header, index) => {
                                 if (cells[index]) {
-                                    productData[header] = cells[index].textContent.trim();
+                                    productData[header] = cells[index].innerHTML.trim();
                                 }
                             });
                             break;
@@ -625,10 +631,26 @@
                     matches.forEach(match => {
                         const placeholder = match.slice(2, -2);
                         if (data[placeholder] !== undefined) {
-                            text = text.replace(match, data[placeholder]);
+                            // Check if the data contains HTML (like <br> tags)
+                            if (data[placeholder].includes('<')) {
+                                // Create a temporary element to parse the HTML
+                                const tempDiv = document.createElement('div');
+                                tempDiv.innerHTML = data[placeholder];
+                                
+                                // Replace the text node with the parsed HTML
+                                const parent = textNode.parentNode;
+                                const fragment = document.createDocumentFragment();
+                                while (tempDiv.firstChild) {
+                                    fragment.appendChild(tempDiv.firstChild);
+                                }
+                                parent.replaceChild(fragment, textNode);
+                            } else {
+                                // Simple text replacement
+                                text = text.replace(match, data[placeholder]);
+                                textNode.textContent = text;
+                            }
                         }
                     });
-                    textNode.textContent = text;
                 }
             });
         }
