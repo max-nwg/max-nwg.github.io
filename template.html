@@ -228,7 +228,7 @@
         .detail-label { color: var(--text-primary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
         .detail-value { color: var(--text-primary); font-weight: 400; }
 
-        .supply-chain-steps-vertical { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 0; }
+        .supply-chain-steps-vertical { display: flex; flex-direction: column; gap: 0.25rem; margin: 0; }
         .supply-chain-step-vertical { 
             display: flex; 
             align-items: center; 
@@ -237,8 +237,10 @@
             border-radius: 12px; 
             padding: 0.75rem; 
             gap: 0.75rem; 
-            margin: 0.15rem 0; 
+            margin: 0; 
             border: 1px solid #e9ecef; 
+            height: 60px;
+            box-sizing: border-box;
         }
 
         .supply-chain-step-vertical .detail-label { 
@@ -246,11 +248,30 @@
             align-items: center; 
             gap: 0.5rem; 
             flex: 1;
+            line-height: 1;
+            height: 100%;
+        }
+        .supply-chain-step-vertical .detail-label img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        .supply-chain-step-vertical .detail-label span {
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            height: 40px;
+            justify-content: flex-start;
         }
         .supply-chain-step-vertical .detail-value { 
             display: flex; 
             align-items: center; 
             justify-content: flex-end;
+            text-align: right;
+            line-height: 1;
         }
 
         .inline-icons-row {
@@ -454,28 +475,28 @@
                         <div class="supply-chain-steps-vertical">
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
-                                    <img src="public/supply_chain_icon_1.png" alt="Garment Production" style="height:40px;width:auto;">
+                                    <img src="public/supply_chain_icon_1.png" alt="Garment Production">
                                     <span>Garment Production</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;">{{product_factory}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
-                                    <img src="public/supply_chain_icon_2.png" alt="Fabric Production" style="height:40px;width:auto;">
+                                    <img src="public/supply_chain_icon_2.png" alt="Fabric Production">
                                     <span>Fabric Production</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;">{{material1_fabric_tier2}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
-                                    <img src="public/supply_chain_icon_3.png" alt="Yarn Production" style="height:40px;width:auto;">
+                                    <img src="public/supply_chain_icon_3.png" alt="Yarn Production">
                                     <span>Yarn Production</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;">{{material1_yarn_tier3}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
-                                    <img src="public/supply_chain_icon_4.png" alt="Raw Material" style="height:40px;width:auto;">
+                                    <img src="public/supply_chain_icon_4.png" alt="Raw Material">
                                     <span>Raw Material</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;">{{material1_raw_tier4}}</div>
@@ -572,32 +593,32 @@
                     <div class="lca-section">
                         <div class="supply-chain-steps-vertical">
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
-                                    <img src="public/lca_icon_1.png" alt="Carbon Emission" style="height:40px;width:auto;">
+                                <div class="detail-label">
+                                    <img src="public/lca_icon_1.png" alt="Carbon Emission">
                                     <span>Carbon Emission</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_carbon_emission}}</div>
+                                <div class="detail-value" style="text-align:right;">{{lca_carbon_emission}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
-                                    <img src="public/lca_icon_2.png" alt="Water Use" style="height:40px;width:auto;">
+                                <div class="detail-label">
+                                    <img src="public/lca_icon_2.png" alt="Water Use">
                                     <span>Water Use</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_water_use}}</div>
+                                <div class="detail-value" style="text-align:right;">{{lca_water_use}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
-                                    <img src="public/lca_icon_3.png" alt="Energy Consumption" style="height:40px;width:auto;">
+                                <div class="detail-label">
+                                    <img src="public/lca_icon_3.png" alt="Energy Consumption">
                                     <span>Energy Consumption</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_energy_consumption}}</div>
+                                <div class="detail-value" style="text-align:right;">{{lca_energy_consumption}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
-                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
-                                    <img src="public/lca_icon_4.png" alt="PET Bottles" style="height:40px;width:auto;">
+                                <div class="detail-label">
+                                    <img src="public/lca_icon_4.png" alt="PET Bottles">
                                     <span>PET Bottles</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_pet_bottles}}</div>
+                                <div class="detail-value" style="text-align:right;">{{lca_pet_bottles}}</div>
                             </div>
                         </div>
                         <div class="cert-link">
