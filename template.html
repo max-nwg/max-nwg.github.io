@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Product Passport for [product_name] - Detailed supply chain and sustainability information">
-    <title>Product Passport - [product_name]</title>
+    <meta name="description" content="Product Passport for {{product_name}} - Detailed supply chain and sustainability information">
+    <title>Product Passport - {{product_name}}</title>
     <!-- External Resources -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -37,7 +37,7 @@
         }
         @media (min-width: 768px) {
             .container {
-                max-width: 48rem;
+                max-width: 64rem;
                 margin: 0 auto;
                 padding: 1rem;
             }
@@ -56,7 +56,7 @@
         }
         @media (min-width: 900px) {
             .container {
-                max-width: 64rem;
+                max-width: 80rem;
             }
             .product-image {
                 display: block;
@@ -65,12 +65,16 @@
             }
             .product-image-container {
                 flex-direction: row !important;
-                align-items: center !important;
+                align-items: flex-start !important;
                 gap: 2rem !important;
             }
             .product-image {
                 flex: 0 0 auto;
                 margin: 0 !important;
+            }
+            .product-image-container > div {
+                flex: 1 !important;
+                min-width: 0 !important;
             }
             .detail-card, .material-card, .lca-card, .desc-care-card {
                 min-width: 320px;
@@ -245,8 +249,8 @@
             object-fit: contain;
         }
         .lca-list-icon {
-            height: 48px;
-            max-height: 48px;
+            height: 40px;
+            max-height: 40px;
             width: auto;
             max-width: 100px;
             object-fit: contain;
@@ -258,45 +262,42 @@
         <!-- Product Section -->
         <section class="product-section">
             <div class="product-info" style="margin-bottom:0.5rem;">
-                <h1 class="product-title">[product_name]</h1>
+                <h1 class="product-title">{{product_name}}</h1>
             </div>
             <div class="product-image-container" style="display:flex;flex-direction:column;align-items:flex-start;gap:1rem;">
-                <img src="public/product_image.png" alt="[product_name]" class="product-image" style="align-self:flex-start;">
-                <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;">
-                    <div style="text-align:left;">
-                        <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;color:var(--text-primary);">[product_name_full]</h2>
-                        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">[product_description_short]</p>
-                        <div class="product-details-inline" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem;">
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">Color:</span>
-                                <span class="detail-value" style="text-align:right;">[product_color]</span>
-                            </div>
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">Size:</span>
-                                <span class="detail-value" style="text-align:right;">[product_sizes]</span>
-                            </div>
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">HS Code:</span>
-                                <span class="detail-value" style="text-align:right;">[product_htscode]</span>
-                            </div>
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">EAN Code:</span>
-                                <span class="detail-value" style="text-align:right;">[ean_code]</span>
-                            </div>
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">Purchase Order:</span>
-                                <span class="detail-value" style="text-align:right;">[purchase_order]</span>
-                            </div>
+                <img src="public/product_image.png" alt="{{product_name}}" class="product-image" style="align-self:flex-start;">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+                    <div style="text-align:left;width:100%;">
+                        <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;color:var(--text-primary);">{{product_name_full}}</h2>
+                        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description_short}}</p>
+                        <div class="product-details-inline" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem;width:100%;">
+                            
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Sizes Available:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_sizes}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">TARIC Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_taric_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{ean_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:right;">{{purchase_order}}</span>
+                                </div>
                         </div>
                     </div>
-                    <div class="product-certifications inline-icons-row" style="margin:0.5rem 0;justify-content:flex-start;">
+                    <div class="product-certifications inline-icons-row" style="margin:0.25rem 0 0 0;justify-content:center;">
                         <img src="public/product_material_cert_1.png" alt="Product Certification 1">
                         <img src="public/product_material_cert_2.png" alt="Product Certification 2">
                         <img src="public/product_material_cert_3.png" alt="Product Certification 3">
                         <img src="public/product_material_cert_4.png" alt="Product Certification 4">
                     </div>
-                    <div style="text-align:left;margin-top:0;">
-                        <span class="cert-link"><a href="certifications.html" target="_blank">Click to view certificates</a></span>
+                    <div style="text-align:center;margin-top:0;">
+                        <a href="certifications.html" target="_blank" style="display:inline-block;background:#f8f9fa;border:1px solid #e9ecef;border-radius:6px;padding:0.25rem 0.5rem;text-decoration:none;color:var(--text-primary);font-weight:500;font-size:0.875rem;">Click to view certificates</a>
                     </div>
                 </div>
             </div>
@@ -315,22 +316,22 @@
                             <div class="desc-title">Care Instructions</div>
                             <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;">
                                 <img src="public/care_icon.png" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
-                                <div class="desc-text" style="text-align:left;">[care_instructions]</div>
+                                <div class="desc-text" style="text-align:left;">{{care_instructions}}</div>
                             </div>
                         </div>
                         <div class="desc-care-card">
                             <div class="desc-title">Extended Care Instructions</div>
-                            <div class="desc-text">[product_text]</div>
+                            <div class="desc-text">{{care_instructions_extended}}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Material Information -->
+        <!-- Material -->
         <section class="section">
             <div class="section-header">
-                <h2>Material Information</h2>
+                <h2>Material</h2>
                 <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
@@ -338,11 +339,11 @@
                     <div class="materials-scroll">
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">[material1_percentage]</span>
-                                <span class="detail-value" style="text-align:right;">[material1_placement]</span>
+                                <span class="detail-value" style="text-align:left;">{{material1_percentage}}</span>
+                                <span class="detail-value" style="text-align:right;">{{material1_placement}}</span>
                             </div>
                             <div style="margin-top:1rem;">
-                                <div class="desc-text">[material1_composition]</div>
+                                <div class="desc-text">{{material1_composition}}</div>
                             </div>
                             <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
                                 <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
@@ -353,11 +354,11 @@
                         </div>
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;">[material2_percentage]</span>
-                                <span class="detail-value" style="text-align:right;">[material2_placement]</span>
+                                <span class="detail-value" style="text-align:left;">{{material2_percentage}}</span>
+                                <span class="detail-value" style="text-align:right;">{{material2_placement}}</span>
                             </div>
                             <div style="margin-top:1rem;">
-                                <div class="desc-text">[material2_composition]</div>
+                                <div class="desc-text">{{material2_composition}}</div>
                             </div>
                             <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
                                 <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
@@ -371,10 +372,10 @@
             </div>
         </section>
 
-        <!-- Supply Chain & Certificates -->
+        <!-- Supply Chain -->
         <section class="section">
             <div class="section-header">
-                <h2>Supply Chain & Certificates</h2>
+                <h2>Supply Chain</h2>
                 <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
@@ -387,28 +388,28 @@
                                     <img src="public/supply_chain_icon_1.png" alt="Garment Production" style="height:40px;width:auto;">
                                     <span>Garment Production</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[product_factory]</div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{product_factory}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_2.png" alt="Fabric Production" style="height:40px;width:auto;">
                                     <span>Fabric Production</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[material1_fabric_tier2]</div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{material1_fabric_tier2}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_3.png" alt="Yarn Production" style="height:40px;width:auto;">
                                     <span>Yarn Production</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[material1_yarn_tier3]</div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{material1_yarn_tier3}}</div>
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
                                     <img src="public/supply_chain_icon_4.png" alt="Raw Material" style="height:40px;width:auto;">
                                     <span>Raw Material</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;display:block;width:100%;">[material1_raw_tier4]</div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{material1_raw_tier4}}</div>
                             </div>
                         </div>
                         <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0.25rem 0;justify-content:center;">
@@ -433,22 +434,22 @@
                         <ul class="lca-kv-list" style="display:block;list-style:none;padding:0;margin:0;">
                             <li style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
                                 <img src="public/lca_icon_1.png" alt="LCA Icon 1" class="lca-list-icon">
-                                <span class="lca-value">[lca_carbon_emission]</span>
+                                <span class="lca-value">{{lca_carbon_emission}}</span>
                             </li>
                             <li style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
                                 <img src="public/lca_icon_2.png" alt="LCA Icon 2" class="lca-list-icon">
-                                <span class="lca-value">[lca_water_use]</span>
+                                <span class="lca-value">{{lca_water_use}}</span>
                             </li>
                             <li style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
                                 <img src="public/lca_icon_3.png" alt="LCA Icon 3" class="lca-list-icon">
-                                <span class="lca-value">[lca_energy_consumption]</span>
+                                <span class="lca-value">{{lca_energy_consumption}}</span>
                             </li>
                             <li style="display:flex;align-items:center;gap:0.5rem;">
                                 <img src="public/lca_icon_4.png" alt="LCA Icon 4" class="lca-list-icon">
-                                <span class="lca-value">[lca_pet_bottles]</span>
+                                <span class="lca-value">{{lca_pet_bottles}}</span>
                             </li>
                         </ul>
-                        <p class="lca-disclaimer">[lca_disclaimer]</p>
+                        <p class="lca-disclaimer">{{lca_disclaimer}}</p>
                     </div>
                 </div>
             </div>
@@ -466,36 +467,81 @@
                         <ul class="lca-kv-list" style="display:flex;flex-direction:row;list-style:none;padding:0;margin:0;gap:0.125rem;justify-content:space-between;">
                             <li style="display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:100px;padding:0.25rem;">
                                 <img src="public/lca_icon_1.png" alt="LCA Icon 1" style="height:32px;width:auto;margin-bottom:0.125rem;">
-                                <span class="lca-value" style="font-size:0.875rem;">[lca_carbon_emission]</span>
+                                <span class="lca-value" style="font-size:0.875rem;">{{lca_carbon_emission}}</span>
                             </li>
                             <li style="display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:100px;padding:0.25rem;">
                                 <img src="public/lca_icon_2.png" alt="LCA Icon 2" style="height:32px;width:auto;margin-bottom:0.125rem;">
-                                <span class="lca-value" style="font-size:0.875rem;">[lca_water_use]</span>
+                                <span class="lca-value" style="font-size:0.875rem;">{{lca_water_use}}</span>
                             </li>
                             <li style="display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:100px;padding:0.25rem;">
                                 <img src="public/lca_icon_3.png" alt="LCA Icon 3" style="height:32px;width:auto;margin-bottom:0.125rem;">
-                                <span class="lca-value" style="font-size:0.875rem;">[lca_energy_consumption]</span>
+                                <span class="lca-value" style="font-size:0.875rem;">{{lca_energy_consumption}}</span>
                             </li>
                             <li style="display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:100px;padding:0.25rem;">
                                 <img src="public/lca_icon_4.png" alt="LCA Icon 4" style="height:32px;width:auto;margin-bottom:0.125rem;">
-                                <span class="lca-value" style="font-size:0.875rem;">[lca_pet_bottles]</span>
+                                <span class="lca-value" style="font-size:0.875rem;">{{lca_pet_bottles}}</span>
                             </li>
                         </ul>
-                        <p class="lca-disclaimer">[lca_disclaimer]</p>
+                        <p class="lca-disclaimer">{{lca_disclaimer}}</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Repairability -->
+        <!-- Life Cycle Assessment (Supply Chain Style) -->
         <section class="section">
             <div class="section-header">
-                <h2>Repairability</h2>
+                <h2>Life Cycle Assessment (Supply Chain Style)</h2>
                 <span class="toggle-icon">+</span>
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
-                    <p>[repairability]</p>
+                    <div class="lca-section">
+                        <div class="supply-chain-steps-vertical">
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/lca_icon_1.png" alt="Carbon Emission" style="height:40px;width:auto;">
+                                    <span>Carbon Emission</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_carbon_emission}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/lca_icon_2.png" alt="Water Use" style="height:40px;width:auto;">
+                                    <span>Water Use</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_water_use}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/lca_icon_3.png" alt="Energy Consumption" style="height:40px;width:auto;">
+                                    <span>Energy Consumption</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_energy_consumption}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label" style="text-align:left;display:inline-flex;align-items:center;gap:0.5rem;">
+                                    <img src="public/lca_icon_4.png" alt="PET Bottles" style="height:40px;width:auto;">
+                                    <span>PET Bottles</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;display:block;width:100%;">{{lca_pet_bottles}}</div>
+                            </div>
+                        </div>
+                        <p class="lca-disclaimer">{{lca_disclaimer}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repair -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Repair</h2>
+                <span class="toggle-icon">+</span>
+            </div>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <p>{{repairability}}</p>
                 </div>
             </div>
         </section>
@@ -508,16 +554,86 @@
             </div>
             <div class="section-content">
                 <div class="section-content-inner">
-                    <p>[end_of_life]</p>
+                    <p>{{end_of_life}}</p>
                 </div>
             </div>
         </section>
     </div>
 
     <script>
-        // Initialize map
+        // Data loading and placeholder replacement
+        async function loadProductData() {
+            try {
+                const currentFilename = window.location.pathname.split('/').pop() || 'template.html';
+                const response = await fetch('public/placeholders.html');
+                const htmlText = await response.text();
+                
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                const table = doc.querySelector('.waffle');
+                
+                if (!table) return;
+                
+                const headerRow = table.querySelector('tr:nth-child(1)');
+                const headers = Array.from(headerRow.querySelectorAll('td')).map(td => td.textContent.trim());
+                
+                const rows = table.querySelectorAll('tr');
+                let productData = null;
+                
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].querySelectorAll('td');
+                    if (cells.length > 0) {
+                        const filePath = cells[0].textContent.trim();
+                        if (filePath === currentFilename) {
+                            productData = {};
+                            headers.forEach((header, index) => {
+                                if (cells[index]) {
+                                    productData[header] = cells[index].textContent.trim();
+                                }
+                            });
+                            break;
+                        }
+                    }
+                }
+                
+                if (productData) {
+                    replacePlaceholders(productData);
+                }
+                
+            } catch (error) {
+                console.error('Error loading product data:', error);
+            }
+        }
+        
+        function replacePlaceholders(data) {
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            textNodes.forEach(textNode => {
+                let text = textNode.textContent;
+                const matches = text.match(/\{\{([^}]+)\}\}/g);
+                
+                if (matches) {
+                    matches.forEach(match => {
+                        const placeholder = match.slice(2, -2);
+                        if (data[placeholder] !== undefined) {
+                            text = text.replace(match, data[placeholder]);
+                        }
+                    });
+                    textNode.textContent = text;
+                }
+            });
+        }
+
+        // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            initMap();
+            loadProductData().then(() => {
+                initMap();
+            });
         });
 
         // Section toggle functionality
