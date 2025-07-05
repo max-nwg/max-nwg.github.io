@@ -624,20 +624,23 @@
             }
         }
 
+        // Section toggle functionality
+        function setupSectionToggles() {
+            document.querySelectorAll('.section-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    content.classList.toggle('active');
+                    const icon = header.querySelector('.toggle-icon');
+                    icon.textContent = content.classList.contains('active') ? '−' : '+';
+                });
+            });
+        }
+
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             loadPlaceholderData().then(() => {
+                setupSectionToggles(); // Re-attach event listeners after placeholder replacement
                 initMap();
-            });
-        });
-
-        // Section toggle functionality
-        document.querySelectorAll('.section-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                content.classList.toggle('active');
-                const icon = header.querySelector('.toggle-icon');
-                icon.textContent = content.classList.contains('active') ? '−' : '+';
             });
         });
 
