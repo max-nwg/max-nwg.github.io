@@ -7,8 +7,9 @@
     <title>Product Passport - {{product_name}}</title>
     <!-- External Resources -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <!-- Uncomment the line below if you want to use CSV instead of JSON -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script> -->
     <style>
         :root {
             --primary: #2C3E50;
@@ -139,23 +140,17 @@
             transition: max-height 0.2s;
         }
         .section-content.active { max-height: 2000px; }
-        /* Flippable/Scrollable Cards (shared) */
-        .product-details-scroll, .materials-scroll, .lca-scroll, .desc-care-scroll {
+        /* Scrollable Cards */
+        .materials-scroll, .desc-care-scroll {
             display: flex;
             overflow-x: auto;
             gap: 0.5rem;
             margin-bottom: 1rem;
-            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            padding: 0.5rem;
             scroll-snap-type: x mandatory;
-            position: relative;
-            scroll-padding-left: 0.5rem;
-            scroll-padding-right: 0.5rem;
+            scroll-padding: 0.5rem;
         }
-        .product-details-scroll > *:last-child,
-        .materials-scroll > *:last-child,
-        .lca-scroll > *:last-child,
-        .desc-care-scroll > *:last-child { margin-right: 0; }
-        .detail-card, .material-card, .lca-card, .desc-care-card {
+        .material-card, .desc-care-card {
             width: 100%;
             min-width: 80vw;
             max-width: 340px;
@@ -165,31 +160,17 @@
             padding: 0.75rem 1rem;
             flex: 0 0 auto;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
-            margin-right: 0.25rem;
             scroll-snap-align: center;
-            scroll-snap-stop: always;
-            position: relative;
-            z-index: 2;
             display: flex;
             flex-direction: column;
-            align-items: stretch;
         }
         @media (min-width: 600px) {
-            .detail-card, .material-card, .lca-card, .desc-care-card {
+            .material-card, .desc-care-card {
                 min-width: 320px;
                 max-width: 340px;
             }
         }
-        @media (min-width: 900px) {
-            .container {
-                max-width: 64rem;
-            }
-            .product-image {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
+
         .desc-title {
             font-weight: 600;
             font-size: 1.1rem;
@@ -202,28 +183,18 @@
             color: var(--text-primary);
             text-align: left;
         }
-        .lca-card img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
-        .lca-label { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
         .lca-value { font-size: 1rem; color: var(--text-primary); font-weight: 500; }
         .product-section .product-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
         .product-section .product-image { width: 100%; max-width: 400px; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); display: block; margin-left: auto; margin-right: auto; }
-        .product-icons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem; }
-        @media (min-width: 480px) { .product-icons { grid-template-columns: repeat(4, 1fr); } }
-        .icon-container { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
-        .icon-container img { width: 32px; height: 32px; margin-bottom: 0.5rem; }
-        .icon-label { font-size: 0.875rem; color: var(--text-secondary); }
+
         .map-container { height: 300px; border-radius: var(--radius); margin: 1rem 0; border: 1px solid var(--border-color); }
-        .detail-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
-        @media (min-width: 480px) { .detail-grid { grid-template-columns: repeat(2, 1fr); } }
-        .detail-item { padding: 0.75rem; background: var(--bg-color); border-radius: var(--radius); border: 1px solid var(--border-color); }
+
         .detail-label { color: var(--text-primary); font-size: 0.875rem; font-weight: 500; margin-bottom: 0.25rem; }
         .detail-value { color: var(--text-primary); font-weight: 400; }
-        .purchase-order-bar { color: var(--text-primary); font-weight: 600; border-radius: var(--radius); padding: 0.75rem 1rem; margin: 1rem 0 1.25rem 0; text-align: center; font-size: 1.1rem; border: 1px solid var(--border-color); background: var(--bg-color); }
+
         .supply-chain-steps-vertical { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 0; }
         .supply-chain-step-vertical { display: flex; align-items: flex-start; background: #f8f9fa; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1); border-radius: 12px; padding: 0.5rem 0.75rem; gap: 0.75rem; margin: 0.15rem 0; border: 1px solid #e9ecef; }
-        .step-icon-square { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 0.5rem; flex-shrink: 0; }
-        .step-icon-square img { width: 32px; height: 32px; object-fit: contain; }
-        .step-info-vertical { display: flex; flex-direction: column; justify-content: center; }
+
         .supply-chain-step-vertical .detail-label { 
             display: flex; 
             align-items: center; 
@@ -236,11 +207,7 @@
             align-items: center;
             gap: 0.75rem;
         }
-        .certification-squares { display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
-        .cert-square { background: var(--bg-color); border-radius: 0.5rem; padding: 0.5rem; display: flex; align-items: center; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); width: 48px; height: 48px; justify-content: center; }
-        .cert-square img { height: 32px; width: 32px; object-fit: contain; display: block; }
-        .cert-link a { color: var(--primary); font-weight: 600; text-decoration: none; margin-left: 0.5rem; font-size: 1rem; }
-        .cert-link a:hover { text-decoration: underline; }
+
         .inline-icons-row {
             display: flex;
             gap: 1rem;
@@ -262,10 +229,52 @@
         }
         .lca-list-icon {
             height: 40px;
-            max-height: 40px;
             width: auto;
             max-width: 100px;
             object-fit: contain;
+        }
+        
+        /* Product section styles */
+        .product-info { margin-bottom: 0.5rem; }
+        .product-image-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 1rem; 
+        }
+        .product-image { 
+            align-self: flex-start; 
+            width: 100%; 
+            max-width: 400px; 
+            height: auto; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow); 
+        }
+        .product-details-inline { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.5rem; 
+            margin-top: 1rem; 
+            width: 100%; 
+        }
+        .product-certifications { 
+            margin: 0.25rem 0 0 0; 
+            justify-content: center; 
+        }
+        .cert-link { 
+            text-align: center; 
+            margin-top: 0; 
+        }
+        .cert-link a { 
+            display: inline-block; 
+            background: #f8f9fa; 
+            border: 1px solid #e9ecef; 
+            border-radius: 6px; 
+            padding: 0.25rem 0.5rem; 
+            text-decoration: none; 
+            color: var(--text-primary); 
+            font-weight: 500; 
+            font-size: 0.875rem; 
         }
     </style>
 </head>
@@ -273,16 +282,16 @@
     <div class="container">
         <!-- Product Section -->
         <section class="product-section">
-            <div class="product-info" style="margin-bottom:0.5rem;">
+            <div class="product-info">
                 <h1 class="product-title">{{product_name}}</h1>
             </div>
-            <div class="product-image-container" style="display:flex;flex-direction:column;align-items:flex-start;gap:1rem;">
-                <img src="public/product_image.png" alt="{{product_name}}" class="product-image" style="align-self:flex-start;">
+            <div class="product-image-container">
+                <img src="public/product_image.png" alt="{{product_name}}" class="product-image">
                 <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
                     <div style="text-align:left;width:100%;">
                         <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;color:var(--text-primary);">{{product_name_full}}</h2>
                         <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description_short}}</p>
-                        <div class="product-details-inline" style="display:flex;flex-direction:column;gap:0.5rem;margin-top:1rem;width:100%;">
+                        <div class="product-details-inline">
                             
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <span class="detail-value" style="text-align:left;">Sizes Available:</span>
@@ -302,14 +311,14 @@
                                 </div>
                         </div>
                     </div>
-                    <div class="product-certifications inline-icons-row" style="margin:0.25rem 0 0 0;justify-content:center;">
+                    <div class="product-certifications inline-icons-row">
                         <img src="public/product_material_cert_1.png" alt="Product Certification 1">
                         <img src="public/product_material_cert_2.png" alt="Product Certification 2">
                         <img src="public/product_material_cert_3.png" alt="Product Certification 3">
                         <img src="public/product_material_cert_4.png" alt="Product Certification 4">
                     </div>
-                    <div style="text-align:center;margin-top:0;">
-                        <a href="certifications.html" target="_blank" style="display:inline-block;background:#f8f9fa;border:1px solid #e9ecef;border-radius:6px;padding:0.25rem 0.5rem;text-decoration:none;color:var(--text-primary);font-weight:500;font-size:0.875rem;">Click to view certificates</a>
+                    <div class="cert-link">
+                        <a href="certifications.html" target="_blank">Click to view certificates</a>
                     </div>
                 </div>
             </div>
@@ -573,70 +582,51 @@
     </div>
 
     <script>
-        // Data loading and placeholder replacement
-        async function loadProductData() {
+        // Simple placeholder replacement
+        async function loadPlaceholderData() {
             try {
-                const currentFilename = window.location.pathname.split('/').pop() || 'template.html';
-                const response = await fetch('public/placeholders.html');
-                const htmlText = await response.text();
+                const response = await fetch('public/product-data.json');
+                const data = await response.json();
+                const fileData = data['template.html'];
                 
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                const table = doc.querySelector('.waffle');
-                
-                if (!table) return;
-                
-                // Google Sheets structure: thead has column letters, tbody has data rows
-                const headerRow = table.querySelector('tbody tr'); // First tbody row has headers
-                const headers = Array.from(headerRow.querySelectorAll('td')).map(td => td.textContent.trim());
-                
-                let productData = null;
-                
-                // Get all tbody rows (skip thead which has column letters)
-                const dataRows = table.querySelectorAll('tbody tr');
-                
-                // Start from index 1 to skip the header row
-                for (let i = 1; i < dataRows.length; i++) {
-                    const cells = dataRows[i].querySelectorAll('td');
-                    if (cells.length > 0) {
-                        const filePath = cells[0].textContent.trim();
-                        if (filePath === currentFilename) {
-                            productData = {};
-                            headers.forEach((header, index) => {
-                                if (cells[index]) {
-                                    productData[header] = cells[index].innerHTML.trim();
-                                }
-                            });
-                            break;
-                        }
-                    }
+                if (fileData) {
+                    // Replace all placeholders in the document body
+                    document.body.innerHTML = document.body.innerHTML
+                        .replace(/{{product_name}}/g, fileData.product_name)
+                        .replace(/{{product_name_full}}/g, fileData.product_name_full)
+                        .replace(/{{product_description_short}}/g, fileData.product_description_short)
+                        .replace(/{{product_sizes}}/g, fileData.product_sizes)
+                        .replace(/{{product_taric_code}}/g, fileData.product_taric_code)
+                        .replace(/{{ean_code}}/g, fileData.ean_code)
+                        .replace(/{{purchase_order}}/g, fileData.purchase_order)
+                        .replace(/{{care_instructions}}/g, fileData.care_instructions)
+                        .replace(/{{care_instructions_extended}}/g, fileData.care_instructions_extended)
+                        .replace(/{{material1_percentage}}/g, fileData.material1_percentage)
+                        .replace(/{{material1_placement}}/g, fileData.material1_placement)
+                        .replace(/{{material1_composition}}/g, fileData.material1_composition)
+                        .replace(/{{material2_percentage}}/g, fileData.material2_percentage)
+                        .replace(/{{material2_placement}}/g, fileData.material2_placement)
+                        .replace(/{{material2_composition}}/g, fileData.material2_composition)
+                        .replace(/{{product_factory}}/g, fileData.product_factory)
+                        .replace(/{{material1_fabric_tier2}}/g, fileData.material1_fabric_tier2)
+                        .replace(/{{material1_yarn_tier3}}/g, fileData.material1_yarn_tier3)
+                        .replace(/{{material1_raw_tier4}}/g, fileData.material1_raw_tier4)
+                        .replace(/{{lca_carbon_emission}}/g, fileData.lca_carbon_emission)
+                        .replace(/{{lca_water_use}}/g, fileData.lca_water_use)
+                        .replace(/{{lca_energy_consumption}}/g, fileData.lca_energy_consumption)
+                        .replace(/{{lca_pet_bottles}}/g, fileData.lca_pet_bottles)
+                        .replace(/{{lca_disclaimer}}/g, fileData.lca_disclaimer)
+                        .replace(/{{repairability}}/g, fileData.repairability)
+                        .replace(/{{end_of_life}}/g, fileData.end_of_life);
                 }
-                
-                if (productData) {
-                    console.log('Product data found:', productData);
-                    replacePlaceholders(productData);
-                } else {
-                    console.log('No product data found for filename:', currentFilename);
-                }
-                
             } catch (error) {
-                console.error('Error loading product data:', error);
+                console.error('Error loading placeholder data:', error);
             }
-        }
-        
-        function replacePlaceholders(data) {
-            let html = document.body.innerHTML;
-            
-            for (const [key, value] of Object.entries(data)) {
-                html = html.replaceAll(`{{${key}}}`, value);
-            }
-            
-            document.body.innerHTML = html;
         }
 
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            loadProductData().then(() => {
+            loadPlaceholderData().then(() => {
                 initMap();
             });
         });
@@ -774,4 +764,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
