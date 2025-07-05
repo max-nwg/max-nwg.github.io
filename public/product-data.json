@@ -1,0 +1,30 @@
+{
+  "template.html": {
+    "product_name": "UM Full Zip Hoodie Regular Fit",
+    "product_name_full": "3450010, UM Full Zip Hoodie Regular Fit, Grey Melange, Medium",
+    "product_description_short": "This unisex full-zip hoodie is crafted from a blend of 80% organic cotton and 20% recycled polyester, offering a soft, comfortable fit with a 350 gsm fabric weight. Featuring an adjustable drawstring hood, ribbed 2x1 cuffs and bottom hem. The hoodie is enzyme-washed for a smooth, worn-in feel.",
+    "product_sizes": "5XS - 5XL",
+    "product_taric_code": "6110209100",
+    "ean_code": "1234567890123",
+    "purchase_order": "C123456",
+    "care_instructions": "Some instructions here",
+    "care_instructions_extended": "Machine Wash 60<br>Do Not Bleach<br>Tumble Low Temp<br>Ironing Medium Temp<br>Do Not Dry Clean<br><br>Stretch When Wet<br>Wash Inside Out<br>Wash With Similar Colors<br>Reshape While Damp<br>Wash Separately The First Time<br>Care Instructions Exclusive Of Decoration<br>Close All Zippers Velcro Buttons Before Wash",
+    "material1_percentage": "88%",
+    "material1_placement": "Body",
+    "material1_composition": "80% Cotton Organic<br>20% Polyester Recycled<br>350 gsm",
+    "material2_percentage": "12%",
+    "material2_placement": "Hood Lining",
+    "material2_composition": "80% Cotton Organic<br>20% Polyester Recycled<br>350 gsm",
+    "product_factory": "LARIZ FASHION LIMITED<br>Madanpur, Bandar PS Narayanganj - 1411 Dhaka, Bangladesh",
+    "material1_fabric_tier2": "FARIHA KNIT TEX Ltd<br>Baroibogh, Enayetnagar, Fatullah, 1400 Narayanganj, Dhaka Bangladesh",
+    "material1_yarn_tier3": "Punjab, India",
+    "material1_raw_tier4": "Punjab, India",
+    "lca_carbon_emission": "7 kg CO2 equivalent",
+    "lca_water_use": "5000 liters used for this garment",
+    "lca_energy_consumption": "5 kWh average",
+    "lca_pet_bottles": "5 bottles recycled",
+    "lca_disclaimer": "Our LCA calculations are:<br>- based on date sourced from Ecoinvent Database. The database is regulary updated but the calculations are not actively adjusted at this moment.<br>- exclusive of packaging and hangtags<br>- based on the production of one piece in size medium, men's style<br>- calculated according to ISO14040, but not verified<br>- calculated with an average of KwH per country, not per production facility<br>Transportation:<br>- includes the distance in between each manufacturer (spinning, weaving/knitting, dyeing, cutting and sewing) to the local harbour by truck<br>- includes the distance between harbours by ship<br>- The type of truck and ship are not specified<br>- is calculated up to the warehouse in Aarschot, Belgium<br>- Transportation of the manufacturing of the trims is not calculated<br>Don't hesitate to reach out to um@texet.be, if you have any questions regarding our LCA's.",
+    "repairability": "repairability",
+    "end_of_life": "End of life"
+  }
+} 
