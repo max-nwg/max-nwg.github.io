@@ -615,7 +615,6 @@
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
                                 <span class="detail-value" style="text-align:left;">{{material1_percentage}}</span>
-                                <span class="detail-value" style="text-align:right;">{{material1_placement}}</span>
                             </div>
                             <div style="margin-top:1rem;">
                                 <div class="desc-text">{{material1_composition}}</div>
@@ -630,7 +629,6 @@
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
                                 <span class="detail-value" style="text-align:left;">{{material2_percentage}}</span>
-                                <span class="detail-value" style="text-align:right;">{{material2_placement}}</span>
                             </div>
                             <div style="margin-top:1rem;">
                                 <div class="desc-text">{{material2_composition}}</div>
@@ -799,10 +797,8 @@
                         .replace(/{{care_instructions}}/g, fileData.care_instructions)
                         .replace(/{{care_instructions_extended}}/g, fileData.care_instructions_extended)
                         .replace(/{{material1_percentage}}/g, fileData.material1_percentage)
-                        .replace(/{{material1_placement}}/g, fileData.material1_placement)
                         .replace(/{{material1_composition}}/g, fileData.material1_composition)
                         .replace(/{{material2_percentage}}/g, fileData.material2_percentage)
-                        .replace(/{{material2_placement}}/g, fileData.material2_placement)
                         .replace(/{{material2_composition}}/g, fileData.material2_composition)
                         .replace(/{{product_factory}}/g, fileData.product_factory)
                         .replace(/{{material1_fabric_tier2}}/g, fileData.material1_fabric_tier2)
@@ -989,4 +985,4 @@
         }
     </script>
 </body>
-</html> 
+</html>
