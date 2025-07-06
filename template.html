@@ -794,6 +794,9 @@
                 const fileData = data['template.html'];
                 
                 if (fileData) {
+                    // Replace title placeholder
+                    document.title = document.title.replace(/{{product_name}}/g, fileData.product_name);
+                    
                     // Replace all placeholders in the document body
                     document.body.innerHTML = document.body.innerHTML
                         .replace(/{{product_name}}/g, fileData.product_name)
