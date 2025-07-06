@@ -33,6 +33,7 @@
             background: var(--bg-color);
             color: var(--text-primary);
             line-height: 1.5;
+            overflow-y: scroll;
         }
         
         /* Container and Layout */
@@ -61,36 +62,19 @@
         /* Section Headers */
         .section {
             position: relative;
-            margin: 0.5rem 0;
+            margin: 0;
             cursor: pointer;
             background: var(--bg-color) !important;
             box-shadow: var(--shadow-sm);
-            border-radius: var(--radius);
+            border-radius: 0;
             border-bottom: 1px solid var(--border-color);
             max-width: 100%;
             -webkit-tap-highlight-color: transparent;
-            transition: background-color 0.15s ease;
-        }
-        
-        /* Custom tap highlight effect */
-        .section:active {
-            background: #f8f9fa !important;
         }
         
 
         
-        .section-header {
-            font-size: 1.125rem;
-            font-weight: 500;
-            margin: 0;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            user-select: none;
-            position: relative;
-            height: 48px;
-            display: flex;
-            align-items: center;
-        }
+
         
         .toggle-icon {
             position: absolute;
@@ -106,13 +90,31 @@
         /* Hidden checkbox for CSS-only accordion */
         .section-toggle {
             position: absolute;
-            height: 100%;
+            height: 72px;
             width: 100%;
             opacity: 0;
             top: 0;
             left: 0;
             cursor: pointer;
-            z-index: 1;
+            z-index: 10;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .section-header {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin: 0;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            user-select: none;
+            position: relative;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         /* Section Content */
@@ -577,7 +579,10 @@
         <!-- Care Section -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="care-toggle">
-            <h2 class="section-header">Care<i class="fa fa-chevron-down toggle-icon"></i></h2>
+            <label for="care-toggle" class="section-header">
+                <span>Care</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
@@ -600,7 +605,10 @@
         <!-- Material -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="material-toggle">
-            <h2 class="section-header">Material<i class="fa fa-chevron-down toggle-icon"></i></h2>
+            <label for="material-toggle" class="section-header">
+                <span>Material</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="materials-scroll">
@@ -642,7 +650,10 @@
         <!-- Supply Chain -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="supply-chain-toggle">
-            <h2 class="section-header">Supply Chain<i class="fa fa-chevron-down toggle-icon"></i></h2>
+            <label for="supply-chain-toggle" class="section-header">
+                <span>Supply Chain</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="supply-chain-section">
@@ -692,7 +703,10 @@
         <!-- Life Cycle Assessment -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="lca-toggle">
-            <h2 class="section-header">Life Cycle Assessment<i class="fa fa-chevron-down toggle-icon"></i></h2>
+            <label for="lca-toggle" class="section-header">
+                <span>Life Cycle Assessment</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="supply-chain-steps-vertical">
@@ -735,7 +749,10 @@
         <!-- Repair -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="repair-toggle">
-            <h2 class="section-header">Repair<i class="fa fa-chevron-down toggle-icon"></i></h2>
+            <label for="repair-toggle" class="section-header">
+                <span>Repair</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
@@ -751,7 +768,10 @@
         <!-- End of Life -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="end-of-life-toggle">
-            <h2 class="section-header">End of Life<i class="fa fa-chevron-down toggle-icon"></i></h2>
+            <label for="end-of-life-toggle" class="section-header">
+                <span>End of Life</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
