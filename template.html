@@ -7,6 +7,7 @@
     <title>Product Passport - {{product_name}}</title>
     <!-- External Resources -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
     <style>
         :root {
@@ -58,51 +59,76 @@
         }
         
         /* Section Headers */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .section {
+            position: relative;
+            margin: 0.5rem 0;
+            cursor: pointer;
             background: var(--bg-color) !important;
             box-shadow: var(--shadow-sm);
             border-radius: var(--radius);
-            margin: 0.5rem 0;
-            padding: 0.75rem 1rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            user-select: none;
             border-bottom: 1px solid var(--border-color);
             max-width: 100%;
-            min-height: 48px;
         }
         
-        .section-header h2 {
+
+        
+        .section-header {
             font-size: 1.125rem;
             font-weight: 500;
             margin: 0;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            user-select: none;
+            position: relative;
+            height: 48px;
+            display: flex;
+            align-items: center;
         }
         
         .toggle-icon {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-left: auto;
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            user-select: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 24px;
-            min-height: 24px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        
+        /* Hidden checkbox for CSS-only accordion */
+        .section-toggle {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            z-index: 1;
         }
         
         /* Section Content */
         .section-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.2s;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .section-content.active { 
-            max-height: 2000px; 
+        /* When checkbox is checked, expand content */
+        .section-toggle:checked ~ .section-content {
+            max-height: 2000px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* When checkbox is checked, rotate chevron */
+        .section-toggle:checked ~ .section-header .toggle-icon {
+            transform: translateY(-50%) rotate(180deg);
         }
         
         .section-content-inner {
@@ -156,7 +182,7 @@
             gap: 0.75rem; 
             margin: 0; 
             border: 1px solid #e9ecef; 
-            height: 60px;
+            height: 80px;
             box-sizing: border-box;
         }
         
@@ -543,10 +569,8 @@
 
         <!-- Care Section -->
         <section class="section">
-            <div class="section-header">
-                <h2>Care</h2>
-                <span class="toggle-icon">+</span>
-            </div>
+            <input type="checkbox" class="section-toggle" id="care-toggle">
+            <h2 class="section-header">Care<i class="fa fa-chevron-down toggle-icon"></i></h2>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
@@ -568,10 +592,8 @@
 
         <!-- Material -->
         <section class="section">
-            <div class="section-header">
-                <h2>Material</h2>
-                <span class="toggle-icon">+</span>
-            </div>
+            <input type="checkbox" class="section-toggle" id="material-toggle">
+            <h2 class="section-header">Material<i class="fa fa-chevron-down toggle-icon"></i></h2>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="materials-scroll">
@@ -612,10 +634,8 @@
 
         <!-- Supply Chain -->
         <section class="section">
-            <div class="section-header">
-                <h2>Supply Chain</h2>
-                <span class="toggle-icon">+</span>
-            </div>
+            <input type="checkbox" class="section-toggle" id="supply-chain-toggle">
+            <h2 class="section-header">Supply Chain<i class="fa fa-chevron-down toggle-icon"></i></h2>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="supply-chain-section">
@@ -664,10 +684,8 @@
 
         <!-- Life Cycle Assessment -->
         <section class="section">
-            <div class="section-header">
-                <h2>Life Cycle Assessment</h2>
-                <span class="toggle-icon">+</span>
-            </div>
+            <input type="checkbox" class="section-toggle" id="lca-toggle">
+            <h2 class="section-header">Life Cycle Assessment<i class="fa fa-chevron-down toggle-icon"></i></h2>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="supply-chain-steps-vertical">
@@ -709,10 +727,8 @@
 
         <!-- Repair -->
         <section class="section">
-            <div class="section-header">
-                <h2>Repair</h2>
-                <span class="toggle-icon">+</span>
-            </div>
+            <input type="checkbox" class="section-toggle" id="repair-toggle">
+            <h2 class="section-header">Repair<i class="fa fa-chevron-down toggle-icon"></i></h2>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
@@ -727,10 +743,8 @@
 
         <!-- End of Life -->
         <section class="section">
-            <div class="section-header">
-                <h2>End of Life</h2>
-                <span class="toggle-icon">+</span>
-            </div>
+            <input type="checkbox" class="section-toggle" id="end-of-life-toggle">
+            <h2 class="section-header">End of Life<i class="fa fa-chevron-down toggle-icon"></i></h2>
             <div class="section-content">
                 <div class="section-content-inner">
                     <div class="desc-care-scroll">
@@ -787,22 +801,9 @@
             }
         }
 
-        // Section toggle functionality
-        function setupSectionToggles() {
-            document.querySelectorAll('.section-header').forEach(header => {
-                header.addEventListener('click', () => {
-                    const content = header.nextElementSibling;
-                    content.classList.toggle('active');
-                    const icon = header.querySelector('.toggle-icon');
-                    icon.textContent = content.classList.contains('active') ? '−' : '+';
-                });
-            });
-        }
-
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             loadPlaceholderData().then(() => {
-                setupSectionToggles(); // Re-attach event listeners after placeholder replacement
                 initMap();
             });
         });
