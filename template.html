@@ -558,6 +558,10 @@
                                     <span class="detail-value" style="text-align:right;">{{ean_code}}</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <span class="detail-value" style="text-align:left;">Purchase Order:</span>
                                     <span class="detail-value" style="text-align:right;">{{purchase_order}}</span>
                                 </div>
@@ -793,6 +797,7 @@
                         .replace(/{{product_sizes}}/g, fileData.product_sizes)
                         .replace(/{{product_taric_code}}/g, fileData.product_taric_code)
                         .replace(/{{ean_code}}/g, fileData.ean_code)
+                        .replace(/{{product_code}}/g, fileData.product_code)
                         .replace(/{{purchase_order}}/g, fileData.purchase_order)
                         .replace(/{{care_instructions}}/g, fileData.care_instructions)
                         .replace(/{{care_instructions_extended}}/g, fileData.care_instructions_extended)
@@ -985,4 +990,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
