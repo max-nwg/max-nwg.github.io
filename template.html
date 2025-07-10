@@ -568,10 +568,10 @@
                         </div>
                     </div>
                     <div class="product-certifications inline-icons-row">
-                        <img src="public/product_material_cert_1.png" alt="Product Certification 1">
-                        <img src="public/product_material_cert_2.png" alt="Product Certification 2">
-                        <img src="public/product_material_cert_3.png" alt="Product Certification 3">
-                        <img src="public/product_material_cert_4.png" alt="Product Certification 4">
+                        <a href="{{product_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Certification 1"></a>
+                        <a href="{{product_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Certification 2"></a>
+                        <a href="{{product_cert_3_url}}" target="_blank"><img src="public/product_material_cert_3.png" alt="Product Certification 3"></a>
+                        <a href="{{product_cert_4_url}}" target="_blank"><img src="public/product_material_cert_4.png" alt="Product Certification 4"></a>
                     </div>
                     <div class="cert-link">
                         <a href="certificates_and_disclaimers.html" target="_blank">Click to view certificates</a>
@@ -624,10 +624,9 @@
                                 <div class="desc-text">{{material1_composition}}</div>
                             </div>
                             <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
-                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
-                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
-                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
-                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
+                                <a href="{{material_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Material Cert 1"></a>
+                                <a href="{{material_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Material Cert 2"></a>
+                                <a href="{{material_cert_3_url}}" target="_blank"><img src="public/product_material_cert_3.png" alt="Product Material Cert 3"></a>
                             </div>
                         </div>
                         <div class="material-card">
@@ -638,10 +637,9 @@
                                 <div class="desc-text">{{material2_composition}}</div>
                             </div>
                             <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
-                                <img src="public/product_material_cert_1.png" alt="Product Material Cert 1">
-                                <img src="public/product_material_cert_2.png" alt="Product Material Cert 2">
-                                <img src="public/product_material_cert_3.png" alt="Product Material Cert 3">
-                                <img src="public/product_material_cert_4.png" alt="Product Material Cert 4">
+                                <a href="{{material_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Material Cert 1"></a>
+                                <a href="{{material_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Material Cert 2"></a>
+                                <a href="{{material_cert_3_url}}" target="_blank"><img src="public/product_material_cert_3.png" alt="Product Material Cert 3"></a>
                             </div>
                         </div>
                     </div>
@@ -693,9 +691,9 @@
                             </div>
                         </div>
                         <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0.25rem 0;justify-content:center;">
-                            <img src="public/supply_chain_cert_1.png" alt="Cert 1">
-                            <img src="public/supply_chain_cert_2.png" alt="Cert 2">
-                            <img src="public/supply_chain_cert_3.png" alt="Cert 3">
+                            <a href="{{supply_chain_cert_1_url}}" target="_blank"><img src="public/supply_chain_cert_1.png" alt="Cert 1"></a>
+                            <a href="{{supply_chain_cert_2_url}}" target="_blank"><img src="public/supply_chain_cert_2.png" alt="Cert 2"></a>
+                            <a href="{{supply_chain_cert_3_url}}" target="_blank"><img src="public/supply_chain_cert_3.png" alt="Cert 3"></a>
                         </div>
                     </div>
                 </div>
@@ -815,7 +813,17 @@
                         .replace(/{{lca_pet_bottles}}/g, fileData.lca_pet_bottles)
                         .replace(/{{lca_disclaimer}}/g, fileData.lca_disclaimer)
                         .replace(/{{repairability}}/g, fileData.repairability)
-                        .replace(/{{end_of_life}}/g, fileData.end_of_life);
+                        .replace(/{{end_of_life}}/g, fileData.end_of_life)
+                        .replace(/{{product_cert_1_url}}/g, fileData.product_cert_1_url)
+                        .replace(/{{product_cert_2_url}}/g, fileData.product_cert_2_url)
+                        .replace(/{{product_cert_3_url}}/g, fileData.product_cert_3_url)
+                        .replace(/{{product_cert_4_url}}/g, fileData.product_cert_4_url)
+                        .replace(/{{material_cert_1_url}}/g, fileData.material_cert_1_url)
+                        .replace(/{{material_cert_2_url}}/g, fileData.material_cert_2_url)
+                        .replace(/{{material_cert_3_url}}/g, fileData.material_cert_3_url)
+                        .replace(/{{supply_chain_cert_1_url}}/g, fileData.supply_chain_cert_1_url)
+                        .replace(/{{supply_chain_cert_2_url}}/g, fileData.supply_chain_cert_2_url)
+                        .replace(/{{supply_chain_cert_3_url}}/g, fileData.supply_chain_cert_3_url);
                 }
             } catch (error) {
                 console.error('Error loading placeholder data:', error);
