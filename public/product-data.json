@@ -26,6 +26,16 @@
     "lca_pet_bottles": "5 bottles recycled",
     "lca_disclaimer": "Our LCA calculations are:<br>- based on date sourced from Ecoinvent Database. The database is regulary updated but the calculations are not actively adjusted at this moment.<br>- exclusive of packaging and hangtags<br>- based on the production of one piece in size medium, men's style<br>- calculated according to ISO14040, but not verified<br>- calculated with an average of KwH per country, not per production facility<br>Transportation:<br>- includes the distance in between each manufacturer (spinning, weaving/knitting, dyeing, cutting and sewing) to the local harbour by truck<br>- includes the distance between harbours by ship<br>- The type of truck and ship are not specified<br>- is calculated up to the warehouse in Aarschot, Belgium<br>- Transportation of the manufacturing of the trims is not calculated<br>Don't hesitate to reach out to um@texet.be, if you have any questions regarding our LCA's.",
     "repairability": "repairability",
-    "end_of_life": "End of life"
+    "end_of_life": "End of life",
+    "product_cert_1_url": "https://textileexchange.org/organic-content-standard",
+    "product_cert_2_url": "https://textileexchange.org/recycled-claim-global-recycled-standard",
+    "product_cert_3_url": "https://textileexchange.org/recycled-claim-global-recycled-standard",
+    "product_cert_4_url": "https://www.oeko-tex.com/en/detail?number=M2AN10RT",
+    "material_cert_1_url": "https://textileexchange.org/recycled-claim-global-recycled-standard",
+    "material_cert_2_url": "https://www.oeko-tex.com/en/detail?number=M2AN111K8",
+    "material_cert_3_url": "https://www.oeko-tex.com/en/detail?number=M2AN111K8",
+    "supply_chain_cert_1_url": "https://www.oeko-tex.com/en/detail?number=M2AN111K8",
+    "supply_chain_cert_2_url": "https://www.oeko-tex.com/en/detail?number=M2AN111K8",
+    "supply_chain_cert_3_url": "https://textileexchange.org/organic-content-standard"
   }
 } 
