@@ -280,7 +280,7 @@
         }
         
         .product-section .product-title { 
-            font-size: 1.75rem; 
+            font-size: 1.5rem; 
             font-weight: 600; 
             margin-bottom: 0.5rem; 
         }
@@ -560,34 +560,10 @@
             </div>
             <div class="product-image-container">
                 <img src="public/product_image.png" alt="{{product_name}}" class="product-image">
-                <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
-                    <div style="text-align:left;width:100%;">
-                        <h2 style="font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;color:var(--text-primary);">{{product_name_full}}</h2>
-                        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description_short}}</p>
-                        <div class="product-details-inline">
-                            
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">Sizes Available:</span>
-                                    <span class="detail-value" style="text-align:right;">{{product_sizes}}</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">TARIC Code:</span>
-                                    <span class="detail-value" style="text-align:right;">{{product_taric_code}}</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
-                                    <span class="detail-value" style="text-align:right;">{{ean_code}}</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
-                                    <span class="detail-value" style="text-align:right;">{{product_code}}</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
-                                    <span class="detail-value" style="text-align:right;">{{purchase_order}}</span>
-                                </div>
+                                    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+                        <div style="text-align:left;width:100%;">
+                            <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description_short}}</p>
                         </div>
-                    </div>
                     <div class="product-certifications inline-icons-row">
                         <a href="{{product_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Certification 1"></a>
                         <a href="{{product_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Certification 2"></a>
@@ -595,7 +571,7 @@
                         <a href="{{product_cert_4_url}}" target="_blank"><img src="public/product_material_cert_4.png" alt="Product Certification 4"></a>
                     </div>
                     <div class="cert-link">
-                        <a href="certificates_and_disclaimers.html" target="_blank">Click to view certificates</a>
+                        <a href="certificates_and_disclaimers.html" target="_blank">Click to view all certificates</a>
                     </div>
                 </div>
             </div>
@@ -721,6 +697,55 @@
             </div>
         </section>
 
+        <!-- Product Details -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="product-details-toggle">
+            <label for="product-details-toggle" class="section-header">
+                <span>Product Details</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Product Information</div>
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Sizes Available:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_sizes}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">TARIC Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_taric_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{ean_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:right;">{{purchase_order}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="material-card">
+                            <div class="desc-title">Import Information</div>
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Importer:</span>
+                                    <span class="detail-value" style="text-align:right;">{{importer}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Life Cycle Assessment -->
         <section class="section">
             <input type="checkbox" class="section-toggle" id="lca-toggle">
@@ -811,7 +836,6 @@
                     // Replace all placeholders in the document body
                     document.body.innerHTML = document.body.innerHTML
                         .replace(/{{product_name}}/g, fileData.product_name)
-                        .replace(/{{product_name_full}}/g, fileData.product_name_full)
                         .replace(/{{product_description_short}}/g, fileData.product_description_short)
                         .replace(/{{product_sizes}}/g, fileData.product_sizes)
                         .replace(/{{product_taric_code}}/g, fileData.product_taric_code)
@@ -844,7 +868,8 @@
                         .replace(/{{material_cert_3_url}}/g, fileData.material_cert_3_url)
                         .replace(/{{supply_chain_cert_1_url}}/g, fileData.supply_chain_cert_1_url)
                         .replace(/{{supply_chain_cert_2_url}}/g, fileData.supply_chain_cert_2_url)
-                        .replace(/{{supply_chain_cert_3_url}}/g, fileData.supply_chain_cert_3_url);
+                        .replace(/{{supply_chain_cert_3_url}}/g, fileData.supply_chain_cert_3_url)
+                        .replace(/{{importer}}/g, fileData.importer);
                 }
             } catch (error) {
                 console.error('Error loading placeholder data:', error);
