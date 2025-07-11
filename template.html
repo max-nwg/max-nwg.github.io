@@ -711,7 +711,11 @@
                             <div class="desc-title">Product Information</div>
                             <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">Sizes Available:</span>
+                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
+                                    <span class="detail-value" style="text-align:right;">{{product_code}}</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Available Sizes:</span>
                                     <span class="detail-value" style="text-align:right;">{{product_sizes}}</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -723,10 +727,6 @@
                                     <span class="detail-value" style="text-align:right;">{{ean_code}}</span>
                                 </div>
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
-                                    <span class="detail-value" style="text-align:right;">{{product_code}}</span>
-                                </div>
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <span class="detail-value" style="text-align:left;">Purchase Order:</span>
                                     <span class="detail-value" style="text-align:right;">{{purchase_order}}</span>
                                 </div>
@@ -734,12 +734,7 @@
                         </div>
                         <div class="material-card">
                             <div class="desc-title">Import Information</div>
-                            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
-                                <div style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span class="detail-value" style="text-align:left;">Importer:</span>
-                                    <span class="detail-value" style="text-align:right;">{{importer}}</span>
-                                </div>
-                            </div>
+                            <div class="desc-text">{{importer}}</div>
                         </div>
                     </div>
                 </div>
@@ -1044,4 +1039,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
