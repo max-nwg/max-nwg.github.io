@@ -43,6 +43,13 @@
             overflow-y: scroll;
         }
         
+        /* iOS Safari: prevent horizontal page panning/stretch while preserving carousels */
+        @supports (-webkit-touch-callout: none) {
+            html, body { overflow-x: hidden; }
+            body { touch-action: pan-y; }
+            .materials-scroll, .desc-care-scroll { touch-action: pan-x; }
+        }
+        
         /* Override any system dark mode preferences */
         @media (prefers-color-scheme: dark) {
             html, body, * {
