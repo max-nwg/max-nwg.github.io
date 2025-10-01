@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#2C3E50">
     <meta name="description" content="Product information for {{product_name}}">
     <title>Product Information</title>
     <!-- External Resources -->
@@ -26,6 +28,11 @@
             --max-width-desktop: 80rem;
         }
         
+        /* Force light mode while preserving original colors */
+        html {
+            color-scheme: light only;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -34,6 +41,33 @@
             color: var(--text-primary);
             line-height: 1.5;
             overflow-y: scroll;
+        }
+        
+        /* Override any system dark mode preferences */
+        @media (prefers-color-scheme: dark) {
+            html, body, * {
+                color-scheme: light only !important;
+            }
+            
+            body {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section, .product-section {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section-header {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section-content {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
         }
         
         /* Container and Layout */
@@ -902,7 +936,7 @@
                 doubleClickZoom: false,
                 boxZoom: false,
                 keyboard: false
-            }).setView([27, 82.5], 5);
+            }).setView([28, 95], 4);
             
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
                 maxZoom: 19,
