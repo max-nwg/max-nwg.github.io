@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light only">
     <meta name="theme-color" content="#2C3E50">
-    <meta name="description" content="Product Passport for {{product_name}} - Detailed supply chain and sustainability information">
+    <meta name="description" content="Product information for {{product_name}}">
     <title>Product Passport - {{product_name}}</title>
     <!-- External Resources -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -596,7 +596,7 @@
                 <img src="public/product_image.jpg" alt="{{product_name}}" class="product-image">
                                     <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
                         <div style="text-align:left;width:100%;">
-                            <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description_short}}</p>
+                            <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description}}</p>
                         </div>
                     <div class="product-certifications inline-icons-row">
                         <a href="{{product_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Certification 1"></a>
@@ -632,10 +632,6 @@
                             <div class="desc-title">Extended Care Instructions</div>
                             <div class="desc-text">{{care_instructions_extended}}</div>
                         </div>
-                        <div class="desc-care-card">
-                            <div class="desc-title">Product Longer Care</div>
-                            <div class="desc-text">{{product_longer_care}}</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -653,7 +649,7 @@
                     <div class="materials-scroll">
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;font-weight:600;">{{material1_percentage}}</span>
+                                <span class="detail-value" style="text-align:left;font-weight:600;">{{material1_placement}}</span>
                             </div>
                             <div style="margin-top:1rem;">
                                 <div class="desc-text">{{material1_composition}}</div>
@@ -666,7 +662,7 @@
                         </div>
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;font-weight:600;">{{material2_percentage}}</span>
+                                <span class="detail-value" style="text-align:left;font-weight:600;">{{material2_placement}}</span>
                             </div>
                             <div style="margin-top:1rem;">
                                 <div class="desc-text">{{material2_composition}}</div>
@@ -801,28 +797,28 @@
                                 <img src="public/lca_icon_1.png" alt="Carbon Emission">
                                 <span>Carbon<br>Emission</span>
                             </div>
-                            <div class="detail-value" style="text-align:right;">{{lca_carbon_emission}}</div>
+                            <div class="detail-value" style="text-align:right;">{{lca_carbon}}</div>
                         </div>
                         <div class="supply-chain-step-vertical">
                             <div class="detail-label">
                                 <img src="public/lca_icon_2.png" alt="Water Use">
                                 <span>Water<br>Use</span>
                             </div>
-                            <div class="detail-value" style="text-align:right;">{{lca_water_use}}</div>
+                            <div class="detail-value" style="text-align:right;">{{lca_water}}</div>
                         </div>
                         <div class="supply-chain-step-vertical">
                             <div class="detail-label">
                                 <img src="public/lca_icon_3.png" alt="Energy Consumption">
                                 <span>Energy<br>Consumption</span>
                             </div>
-                            <div class="detail-value" style="text-align:right;">{{lca_energy_consumption}}</div>
+                            <div class="detail-value" style="text-align:right;">{{lca_energy}}</div>
                         </div>
                         <div class="supply-chain-step-vertical">
                             <div class="detail-label">
                                 <img src="public/lca_icon_4.png" alt="PET Bottles">
                                 <span>PET<br>Bottles</span>
                             </div>
-                            <div class="detail-value" style="text-align:right;">{{lca_pet_bottles}}</div>
+                            <div class="detail-value" style="text-align:right;">{{lca_bottles}}</div>
                         </div>
                     </div>
                     <div class="cert-link">
@@ -876,7 +872,7 @@
                     // Replace all placeholders in the document body
                     document.body.innerHTML = document.body.innerHTML
                         .replace(/{{product_name}}/g, fileData.product_name)
-                        .replace(/{{product_description_short}}/g, fileData.product_description_short)
+                        .replace(/{{product_description}}/g, fileData.product_description)
                         .replace(/{{product_sizes}}/g, fileData.product_sizes)
                         .replace(/{{product_taric_code}}/g, fileData.product_taric_code)
                         .replace(/{{ean_code}}/g, fileData.ean_code)
@@ -884,21 +880,19 @@
                         .replace(/{{purchase_order}}/g, fileData.purchase_order)
                         .replace(/{{care_instructions}}/g, fileData.care_instructions)
                         .replace(/{{care_instructions_extended}}/g, fileData.care_instructions_extended)
-                        .replace(/{{product_longer_care}}/g, fileData.product_longer_care)
-                        .replace(/{{material1_percentage}}/g, fileData.material1_percentage)
+                        .replace(/{{material1_placement}}/g, fileData.material1_placement)
                         .replace(/{{material1_composition}}/g, fileData.material1_composition)
-                        .replace(/{{material2_percentage}}/g, fileData.material2_percentage)
+                        .replace(/{{material2_placement}}/g, fileData.material2_placement)
                         .replace(/{{material2_composition}}/g, fileData.material2_composition)
                         .replace(/{{product_factory}}/g, fileData.product_factory)
                         .replace(/{{material1_fabric_tier2}}/g, fileData.material1_fabric_tier2)
                         .replace(/{{material1_yarn_tier3}}/g, fileData.material1_yarn_tier3)
                         .replace(/{{material1_raw_tier4}}/g, fileData.material1_raw_tier4)
                         .replace(/{{material1_raw2_tier4}}/g, fileData.material1_raw2_tier4)
-                        .replace(/{{lca_carbon_emission}}/g, fileData.lca_carbon_emission)
-                        .replace(/{{lca_water_use}}/g, fileData.lca_water_use)
-                        .replace(/{{lca_energy_consumption}}/g, fileData.lca_energy_consumption)
-                        .replace(/{{lca_pet_bottles}}/g, fileData.lca_pet_bottles)
-                        .replace(/{{lca_disclaimer}}/g, fileData.lca_disclaimer)
+                        .replace(/{{lca_carbon}}/g, fileData.lca_carbon)
+                        .replace(/{{lca_water}}/g, fileData.lca_water)
+                        .replace(/{{lca_energy}}/g, fileData.lca_energy)
+                        .replace(/{{lca_bottles}}/g, fileData.lca_bottles)
                         .replace(/{{repairability}}/g, fileData.repairability)
                         .replace(/{{end_of_life}}/g, fileData.end_of_life)
                         .replace(/{{product_cert_1_url}}/g, fileData.product_cert_1_url)
