@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#2C3E50">
     <meta name="description" content="Product Passport for {{product_name}} - Detailed supply chain and sustainability information">
     <title>Product Passport - {{product_name}}</title>
     <!-- External Resources -->
@@ -26,6 +28,11 @@
             --max-width-desktop: 80rem;
         }
         
+        /* Force light mode while preserving original colors */
+        html {
+            color-scheme: light only;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -34,6 +41,33 @@
             color: var(--text-primary);
             line-height: 1.5;
             overflow-y: scroll;
+        }
+        
+        /* Override any system dark mode preferences */
+        @media (prefers-color-scheme: dark) {
+            html, body, * {
+                color-scheme: light only !important;
+            }
+            
+            body {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section, .product-section {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section-header {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section-content {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
         }
         
         /* Container and Layout */
@@ -559,7 +593,7 @@
                 <h1 class="product-title">{{product_name}}</h1>
             </div>
             <div class="product-image-container">
-                <img src="public/product_image.png" alt="{{product_name}}" class="product-image">
+                <img src="public/product_image.jpg" alt="{{product_name}}" class="product-image">
                                     <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
                         <div style="text-align:left;width:100%;">
                             <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">{{product_description_short}}</p>
@@ -597,6 +631,10 @@
                         <div class="desc-care-card">
                             <div class="desc-title">Extended Care Instructions</div>
                             <div class="desc-text">{{care_instructions_extended}}</div>
+                        </div>
+                        <div class="desc-care-card">
+                            <div class="desc-title">Product Longer Care</div>
+                            <div class="desc-text">{{product_longer_care}}</div>
                         </div>
                     </div>
                 </div>
@@ -685,6 +723,13 @@
                                     <span>Raw<br>Material</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;">{{material1_raw_tier4}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="public/supply_chain_icon_4b.png" alt="Raw Material 2">
+                                    <span>Raw<br>Material 2</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_raw2_tier4}}</div>
                             </div>
                         </div>
                         <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0.25rem 0;justify-content:center;">
@@ -839,6 +884,7 @@
                         .replace(/{{purchase_order}}/g, fileData.purchase_order)
                         .replace(/{{care_instructions}}/g, fileData.care_instructions)
                         .replace(/{{care_instructions_extended}}/g, fileData.care_instructions_extended)
+                        .replace(/{{product_longer_care}}/g, fileData.product_longer_care)
                         .replace(/{{material1_percentage}}/g, fileData.material1_percentage)
                         .replace(/{{material1_composition}}/g, fileData.material1_composition)
                         .replace(/{{material2_percentage}}/g, fileData.material2_percentage)
@@ -847,6 +893,7 @@
                         .replace(/{{material1_fabric_tier2}}/g, fileData.material1_fabric_tier2)
                         .replace(/{{material1_yarn_tier3}}/g, fileData.material1_yarn_tier3)
                         .replace(/{{material1_raw_tier4}}/g, fileData.material1_raw_tier4)
+                        .replace(/{{material1_raw2_tier4}}/g, fileData.material1_raw2_tier4)
                         .replace(/{{lca_carbon_emission}}/g, fileData.lca_carbon_emission)
                         .replace(/{{lca_water_use}}/g, fileData.lca_water_use)
                         .replace(/{{lca_energy_consumption}}/g, fileData.lca_energy_consumption)
@@ -883,7 +930,8 @@
                 { lat: 23.6351, lon: 90.5153, text: "<strong>Garment Production</strong><br>LARIZ FASHION LIMITED<br>Madanpur, Bandar PS<br>Narayanganj - 1411<br>Dhaka, Bangladesh" },
                 { lat: 23.6194, lon: 90.4722, text: "<strong>Fabric Production</strong><br>FARIHA KNIT TEX Ltd<br>Baroibogh, Enayetnagar<br>Fatullah, 1400 Narayanganj<br>Dhaka, Bangladesh" },
                 { lat: 30.9010, lon: 75.8573, text: "<strong>Yarn Production</strong><br>Yarn Facility<br>Ludhiana<br>Punjab, India" },
-                { lat: 30.1539, lon: 76.1947, text: "<strong>Raw Material</strong><br>Cotton Farm<br>Samana<br>Punjab, India" }
+                { lat: 30.1539, lon: 76.1947, text: "<strong>Raw Material</strong><br>Cotton Farm<br>Samana<br>Punjab, India" },
+                { lat: 31.9207, lon: 120.2849, text: "<strong>Raw Material 2</strong><br>Qingyang Town<br>Jiangyin City<br>China" }
             ];
             
             const map = L.map('map', { 
@@ -906,6 +954,7 @@
             zoomControl._container.style.opacity = '0.5';
             
             const connections = [
+                { start: 4, end: 2, showDistance: true },
                 { start: 3, end: 2, showDistance: false },
                 { start: 2, end: 1, showDistance: true },
                 { start: 1, end: 0, showDistance: false }
@@ -941,7 +990,8 @@
                 'public/supply_chain_icon_1.png',
                 'public/supply_chain_icon_2.png', 
                 'public/supply_chain_icon_3.png',
-                'public/supply_chain_icon_4.png'
+                'public/supply_chain_icon_4.png',
+                'public/supply_chain_icon_4b.png'
             ];
             
             locations.forEach((loc, index) => {
