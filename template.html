@@ -605,33 +605,7 @@
                         <a href="{{product_cert_4_url}}" target="_blank"><img src="public/product_material_cert_4.png" alt="Product Certification 4"></a>
                     </div>
                     <div class="cert-link">
-                        <a href="certificates.html" target="_blank">Click to view all certificates</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Care Section -->
-        <section class="section">
-            <input type="checkbox" class="section-toggle" id="care-toggle">
-            <label for="care-toggle" class="section-header">
-                <span>Care</span>
-                <i class="fa fa-chevron-down toggle-icon"></i>
-            </label>
-            <div class="section-content">
-                <div class="section-content-inner">
-                    <div class="desc-care-scroll">
-                        <div class="desc-care-card">
-                            <div class="desc-title">Care Instructions</div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;">
-                                <img src="public/care_icon.png" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
-                                <div class="desc-text" style="text-align:left;">{{care_instructions}}</div>
-                            </div>
-                        </div>
-                        <div class="desc-care-card">
-                            <div class="desc-title">Extended Care Instructions</div>
-                            <div class="desc-text">{{care_instructions_extended}}</div>
-                        </div>
+                        <a href="certificates.html" target="_blank">Click to read about all certifications</a>
                     </div>
                 </div>
             </div>
@@ -674,6 +648,46 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care Section -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-toggle">
+            <label for="care-toggle" class="section-header">
+                <span>Care</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-care-scroll">
+                        <div class="desc-care-card">
+                            <div class="desc-title">Care Instructions</div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;">
+                                <img src="public/care_icon.png" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
+                                <div class="desc-text" style="text-align:left;">{{care_instructions}}</div>
+                            </div>
+                        </div>
+                        <div class="desc-care-card">
+                            <div class="desc-title">Extended Care Instructions</div>
+                            <div class="desc-text">{{care_instructions_extended}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care to Longevity -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-longevity-toggle">
+            <label for="care-longevity-toggle" class="section-header">
+                <span>Care to Longevity</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">{{care_longevity}}</div>
                 </div>
             </div>
         </section>
@@ -722,8 +736,8 @@
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
-                                    <img src="public/supply_chain_icon_4b.png" alt="Raw Material 2">
-                                    <span>Raw<br>Material 2</span>
+                                    <img src="public/supply_chain_icon_4b.png" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
                                 </div>
                                 <div class="detail-value" style="text-align:right;">{{material1_raw2_tier4}}</div>
                             </div>
@@ -880,6 +894,7 @@
                         .replace(/{{purchase_order}}/g, fileData.purchase_order)
                         .replace(/{{care_instructions}}/g, fileData.care_instructions)
                         .replace(/{{care_instructions_extended}}/g, fileData.care_instructions_extended)
+                        .replace(/{{care_longevity}}/g, fileData.care_longevity)
                         .replace(/{{material1_placement}}/g, fileData.material1_placement)
                         .replace(/{{material1_composition}}/g, fileData.material1_composition)
                         .replace(/{{material2_placement}}/g, fileData.material2_placement)
@@ -925,7 +940,7 @@
                 { lat: 23.6194, lon: 90.4722, text: "<strong>Fabric Production</strong><br>Fariha Knit Tex Ltd<br>Baroibogh, Enayetnagar<br>Fatullah, 1400 Narayanganj<br>Dhaka, Bangladesh" },
                 { lat: 30.9010, lon: 75.8573, text: "<strong>Yarn Production</strong><br>Yarn Facility<br>Ludhiana<br>Punjab, India" },
                 { lat: 30.1539, lon: 76.1947, text: "<strong>Raw Material</strong><br>Cotton Farm<br>Samana<br>Punjab, India" },
-                { lat: 31.9207, lon: 120.2849, text: "<strong>Raw Material 2</strong><br>Qingyang Town<br>Jiangyin City<br>China" }
+                { lat: 31.9207, lon: 120.2849, text: "<strong>Raw Material</strong><br>Qingyang Town<br>Jiangyin City<br>China" }
             ];
             
             const map = L.map('map', { 
