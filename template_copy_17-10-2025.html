@@ -377,6 +377,16 @@
             text-decoration: none;
         }
         
+        .material-icons img {
+            height: 40px;
+        }
+        
+        .material-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
         
         .certification-squares a {
             display: flex;
@@ -618,6 +628,11 @@
                             <div style="margin-top:1rem;">
                                 <div class="desc-text">{{material1_composition}}</div>
                             </div>
+                            <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
+                                <a href="{{material_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Material Cert 1"></a>
+                                <a href="{{material_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Material Cert 2"></a>
+                                <a href="{{material_cert_3_url}}" target="_blank"><img src="public/product_material_cert_3.png" alt="Product Material Cert 3"></a>
+                            </div>
                         </div>
                         <div class="material-card">
                             <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -625,6 +640,11 @@
                             </div>
                             <div style="margin-top:1rem;">
                                 <div class="desc-text">{{material2_composition}}</div>
+                            </div>
+                            <div class="material-icons inline-icons-row" style="margin:0.5rem 0;">
+                                <a href="{{material_cert_1_url}}" target="_blank"><img src="public/product_material_cert_1.png" alt="Product Material Cert 1"></a>
+                                <a href="{{material_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Material Cert 2"></a>
+                                <a href="{{material_cert_3_url}}" target="_blank"><img src="public/product_material_cert_3.png" alt="Product Material Cert 3"></a>
                             </div>
                         </div>
                     </div>
@@ -722,13 +742,10 @@
                                 <div class="detail-value" style="text-align:right;">{{material1_raw2_tier4}}</div>
                             </div>
                         </div>
-                        <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0 0;justify-content:center;">
+                        <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0.25rem 0;justify-content:center;">
                             <a href="{{supply_chain_cert_1_url}}" target="_blank"><img src="public/supply_chain_cert_1.png" alt="Cert 1"></a>
                             <a href="{{supply_chain_cert_2_url}}" target="_blank"><img src="public/supply_chain_cert_2.png" alt="Cert 2"></a>
                             <a href="{{supply_chain_cert_3_url}}" target="_blank"><img src="public/supply_chain_cert_3.png" alt="Cert 3"></a>
-                        </div>
-                        <div style="text-align:center;">
-                            <small style="color:var(--text-secondary);font-size:0.75rem;">*certificates refer to the factory Lariz Fashion Ltd. only</small>
                         </div>
                     </div>
                 </div>
