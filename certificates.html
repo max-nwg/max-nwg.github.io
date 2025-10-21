@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Product Certifications - View detailed certification information">
-    <title>Certificates</title>
+    <meta name="description" content="Product and Supply Chain Certifications">
+    <title>Certifications</title>
     <style>
         :root {
             --primary: #2C3E50;
@@ -83,6 +83,11 @@
             margin: 0 auto 0.75rem;
             display: block;
             object-fit: contain;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .certification-icon:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
         }
         .certification-title {
             font-size: 1.25rem;
@@ -148,45 +153,50 @@
 <body>
     <div class="container">
         <div class="header">
-            <p>Read about what the different certificates mean for our products and supply chain</p>
+            <p>This page provides additional information about the various certifications of the Untagged Movement brand.</p>
         </div>
         <div class="certifications-grid">
             <h2 style="grid-column: 1 / -1; text-align: center; margin-bottom: 1rem; color: var(--text-primary); font-size: 1.5rem;">Product & Material Certificates</h2>
             <div class="certification-card">
-                <img src="public/product_material_cert_1.png" alt="Oekotex Made in Green" class="certification-icon">
+                <a href="public/ceres-cert.pdf" target="_blank"><img src="public/product_cert_4.png" alt="Organic Content Standard" class="certification-icon"></a>
+                <h3 class="certification-title">Organic Content Standard</h3>
+                <p class="certification-description">Organic Content Standard ensuring sustainable material sourcing and processing</p>
+            </div>
+            <div class="certification-card">
+                <a href="public/ceres-cert.pdf" target="_blank"><img src="public/product_cert_5.png" alt="Recycled Content Standard" class="certification-icon"></a>
+                <h3 class="certification-title">Recycled Content Standard</h3>
+                <p class="certification-description">Certification ensuring products contain recycled materials and meet sustainability standards for circular economy practices.</p>
+            </div>
+            <div class="certification-card">
+                <a href="https://www.oeko-tex.com/en/detail?number=" target="_blank"><img src="public/product_cert_1.png" alt="Oekotex Made in Green" class="certification-icon"></a>
                 <h3 class="certification-title">Oekotex Made in Green</h3>
                 <p class="certification-description">Sustainable textile certification ensuring environmentally friendly and socially responsible manufacturing processes.</p>
             </div>
             <div class="certification-card">
-                <img src="public/product_material_cert_2.png" alt="Oekotex 100" class="certification-icon">
+                <a href="public/oekotex100-cert.pdf" target="_blank"><img src="public/product_cert_2.png" alt="Oekotex 100" class="certification-icon"></a>
                 <h3 class="certification-title">Oekotex 100</h3>
                 <p class="certification-description">International testing and certification system for textiles, ensuring products are free from harmful substances.</p>
             </div>
             <div class="certification-card">
-                <img src="public/supply_chain_cert_1.png" alt="OCS-RCS" class="certification-icon">
-                <h3 class="certification-title">OCS-RCS</h3>
-                <p class="certification-description">Organic Content Standard and Recycled Claim Standard ensuring sustainable material sourcing and processing.</p>
-            </div>
-            <div class="certification-card">
-                <img src="public/product_material_cert_3.png" alt="Peta Vegan Approved" class="certification-icon">
-                <h3 class="certification-title">Peta Vegan Approved</h3>
+                <a href="https://petaapprovedvegan.peta.org/search-peta-approved-vegan/?_search=Texet" target="_blank"><img src="public/product_cert_3.png" alt="PETA-Approved Vegan" class="certification-icon"></a>
+                <h3 class="certification-title">PETA-Approved Vegan</A></h3>
                 <p class="certification-description">Certification ensuring products are free from animal-derived materials and meet vegan standards.</p>
             </div>
             <h2 style="grid-column: 1 / -1; text-align: center; margin: 2rem 0 1rem 0; color: var(--text-primary); font-size: 1.5rem;">Company Certificates</h2>
             <div class="certification-card">
-                <img src="public/product_material_cert_1.png" alt="Oekotex STeP" class="certification-icon">
-                <h3 class="certification-title">Oekotex STeP</h3>
-                <p class="certification-description">Sustainable Textile Production certification ensuring environmentally friendly and socially responsible manufacturing processes.</p>
-            </div>
-            <div class="certification-card">
-                <img src="public/product_material_cert_3.png" alt="BSCI" class="certification-icon">
+                <a href="public/bsci-cert.pdf" target="_blank"><img src="public/supply_chain_cert_1.png" alt="BSCI" class="certification-icon"></a>
                 <h3 class="certification-title">BSCI</h3>
                 <p class="certification-description">Business Social Compliance Initiative ensuring ethical working conditions and social responsibility throughout the supply chain.</p>
             </div>
             <div class="certification-card">
-                <img src="public/product_material_cert_4.png" alt="ISO9001" class="certification-icon">
-                <h3 class="certification-title">ISO9001</h3>
+                <a href="public/iso9001-cert.pdf" target="_blank"><img src="public/supply_chain_cert_2.png" alt="ISO9001:2015" class="certification-icon"></a>
+                <h3 class="certification-title">ISO9001:2015</h3>
                 <p class="certification-description">International standard for quality management systems, ensuring consistent product quality and customer satisfaction.</p>
+            </div>
+            <div class="certification-card">
+                <a href="public/step-cert.pdf" target="_blank"><img src="public/supply_chain_cert_3.png" alt="Oekotex STeP" class="certification-icon"></a>
+                <h3 class="certification-title">Oekotex STeP</h3>
+                <p class="certification-description">Sustainable Textile Production certification ensuring environmentally friendly and socially responsible manufacturing processes.</p>
             </div>
         </div>
     </div>

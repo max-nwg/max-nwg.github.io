@@ -355,17 +355,17 @@
             gap: 0.6rem;
             align-items: center;
             justify-content: center;
-            height: 54px;
+            height: 60px;
             overflow-x: auto;
             flex-wrap: nowrap;
             max-width: 100%;
         }
         
         .inline-icons-row img {
-            height: 54px;
+            height: 60px;
             width: auto;
-            max-width: 84px;
-            max-height: 54px;
+            max-width: 100px;
+            max-height: 60px;
             flex: 0 0 auto;
             object-fit: contain;
         }
@@ -593,7 +593,6 @@
                         <a href="{{product_cert_2_url}}" target="_blank"><img src="public/product_material_cert_2.png" alt="Product Certification 2"></a>
                         <a href="{{product_cert_3_url}}" target="_blank"><img src="public/product_material_cert_3.png" alt="Product Certification 3"></a>
                         <a href="{{product_cert_4_url}}" target="_blank"><img src="public/product_material_cert_4.png" alt="Product Certification 4"></a>
-                        <a href="{{product_cert_5_url}}" target="_blank"><img src="public/product_material_cert_5.png" alt="Product Certification 5"></a>
                     </div>
                     <div class="cert-link">
                         <a href="certificates.html" target="_blank">Click to read about all certifications</a>
@@ -898,7 +897,6 @@
                         .replace(/{{product_cert_2_url}}/g, fileData.product_cert_2_url)
                         .replace(/{{product_cert_3_url}}/g, fileData.product_cert_3_url)
                         .replace(/{{product_cert_4_url}}/g, fileData.product_cert_4_url)
-                        .replace(/{{product_cert_5_url}}/g, fileData.product_cert_5_url)
                         .replace(/{{material_cert_1_url}}/g, fileData.material_cert_1_url)
                         .replace(/{{material_cert_2_url}}/g, fileData.material_cert_2_url)
                         .replace(/{{material_cert_3_url}}/g, fileData.material_cert_3_url)
@@ -921,11 +919,11 @@
 
         function initMap() {
             const locations = [
-                { lat: 23.6351, lon: 90.5153, text: "<strong>Garment Production</strong><br>Lariz Fashion Limited<br>Madanpur, Bandar PS<br>Narayanganj - 1411<br>Dhaka, Bangladesh" },
-                { lat: 23.6194, lon: 90.4722, text: "<strong>Fabric Production</strong><br>Fariha Knit Tex Ltd<br>Baroibogh, Enayetnagar<br>Fatullah, 1400 Narayanganj<br>Dhaka, Bangladesh" },
-                { lat: 30.9010, lon: 75.8573, text: "<strong>Yarn Production</strong><br>Yarn Facility<br>Ludhiana<br>Punjab, India" },
-                { lat: 30.1539, lon: 76.1947, text: "<strong>Raw Material</strong><br>Cotton Farm<br>Samana<br>Punjab, India" },
-                { lat: 31.9207, lon: 120.2849, text: "<strong>Raw Material</strong><br>Qingyang Town<br>Jiangyin City<br>China" }
+                { lat: 23.6896, lon: 90.5510, text: "<strong>Garment production</strong><br>Lariz Fashion Ltd.<br>Bandar, Bangladesh" },
+                { lat: 23.6170, lon: 90.4802, text: "<strong>Fabric production</strong><br>Fariha Knit Tex Ltd.<br>Narayanganj, Bangladesh" },
+                { lat: 30.9730, lon: 75.8051, text: "<strong>Yarn</strong><br>Ludhiana<br>Punjab, India" },
+                { lat: 30.8435, lon: 75.9163, text: "<strong>Cotton material</strong><br>Ludhiana<br>Punjab, India" },
+                { lat: 31.5352, lon: 120.3353, text: "<strong>Polyester material</strong><br>Wuxi<br>Jiangyin, China" }
             ];
             
             const map = L.map('map', { 
