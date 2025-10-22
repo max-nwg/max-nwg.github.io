@@ -156,17 +156,14 @@
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transform: translateY(-10px);
             transition: max-height 0.3s ease-out, 
-                        opacity 0.2s ease-out, 
-                        transform 0.2s ease-out;
+                        opacity 0.25s ease-out;
         }
         
         /* When checkbox is checked, expand content */
         .section-toggle:checked ~ .section-content {
             max-height: 1000px;
             opacity: 1;
-            transform: translateY(0);
         }
         
         /* When checkbox is checked, rotate chevron */
@@ -942,7 +939,7 @@
                 doubleClickZoom: false,
                 boxZoom: false,
                 keyboard: false
-            }).setView([28, 85], 2);
+            }).setView([28, 80], 2);
             
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
                 maxZoom: 19,
