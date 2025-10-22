@@ -156,14 +156,18 @@
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 0.3s ease-out, 
-                        opacity 0.25s ease-out;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: max-height 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        opacity 0.2s ease-out;
         }
         
         /* When checkbox is checked, expand content */
         .section-toggle:checked ~ .section-content {
             max-height: 1000px;
             opacity: 1;
+            transform: scaleY(1);
         }
         
         /* When checkbox is checked, rotate chevron */
