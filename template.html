@@ -699,6 +699,13 @@
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
+                                    <img src="public/supply_chain_icon_3.png" alt="Yarn Production">
+                                    <span>Yarn<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_yarn2_tier3c}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
                                     <img src="public/supply_chain_icon_4.png" alt="Raw Material">
                                     <span>Raw<br>Material</span>
                                 </div>
@@ -706,10 +713,17 @@
                             </div>
                             <div class="supply-chain-step-vertical">
                                 <div class="detail-label">
-                                    <img src="public/supply_chain_icon_4b.png" alt="Raw Material">
+                                    <img src="public/supply_chain_4bc.png" alt="Raw Material">
                                     <span>Raw<br>Material</span>
                                 </div>
-                                <div class="detail-value" style="text-align:right;">{{material1_raw2_tier4}}</div>
+                                <div class="detail-value" style="text-align:right;">{{material1_raw2_tier4b}}</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="public/supply_chain_4bc.png" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">{{material1_raw3_tier4c}}</div>
                             </div>
                         </div>
                         <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0 0;justify-content:center;">
@@ -737,7 +751,7 @@
                     <div class="materials-scroll">
                         <div class="material-card">
                             <div class="desc-title">Product Information</div>
-                            <div style="display:flex;flex-direction:column;gap:0.2rem;margin-top:0.1rem;">
+                            <div style="display:flex;flex-direction:column;gap:0.1rem;margin-top:0.1rem;">
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <span class="detail-value" style="text-align:left;">Product Code:</span>
                                     <span class="detail-value" style="text-align:right;">{{product_code}}</span>
@@ -876,7 +890,9 @@
                         .replace(/{{material1_fabric_tier2}}/g, fileData.material1_fabric_tier2)
                         .replace(/{{material1_yarn_tier3}}/g, fileData.material1_yarn_tier3)
                         .replace(/{{material1_raw_tier4}}/g, fileData.material1_raw_tier4)
-                        .replace(/{{material1_raw2_tier4}}/g, fileData.material1_raw2_tier4)
+                        .replace(/{{material1_raw2_tier4b}}/g, fileData.material1_raw2_tier4b)
+                        .replace(/{{material1_yarn2_tier3c}}/g, fileData.material1_yarn2_tier3c)
+                        .replace(/{{material1_raw3_tier4c}}/g, fileData.material1_raw3_tier4c)
                         .replace(/{{lca_carbon}}/g, fileData.lca_carbon)
                         .replace(/{{lca_water}}/g, fileData.lca_water)
                         .replace(/{{lca_energy}}/g, fileData.lca_energy)
@@ -913,7 +929,9 @@
                 { lat: 23.6170, lon: 90.4802, text: "<strong>Fabric production</strong><br>Fariha Knit Tex Ltd.<br>Narayanganj, Bangladesh" },
                 { lat: 30.9052, lon: 75.8539, text: "<strong>Yarn</strong><br>Ludhiana<br>Punjab, India" },
                 { lat: 30.1549, lon: 76.1978, text: "<strong>Cotton material</strong><br>Samana<br>Punjab, India" },
-                { lat: 31.5352, lon: 120.3353, text: "<strong>Polyester material</strong><br>Wuxi<br>Jiangyin, China" }
+                { lat: 31.5352, lon: 120.3353, text: "<strong>Polyester material</strong><br>Wuxi<br>Jiangyin, China" },
+                { lat: 24.0774, lon: 90.2110, text: "<strong>Yarn production</strong><br>Kaliakair<br>Gazipur, Bangladesh" },
+                { lat: 37.7521, lon: 27.4050, text: "<strong>Raw material</strong><br>Söke<br>Aydın, Turkey" }
             ];
             
             const map = L.map('map', { 
@@ -939,7 +957,9 @@
                 { start: 4, end: 2 },
                 { start: 3, end: 2 },
                 { start: 2, end: 1 },
-                { start: 1, end: 0 }
+                { start: 1, end: 0 },
+                { start: 6, end: 5 },
+                { start: 5, end: 1 }
             ];
             
             connections.forEach(conn => {
@@ -959,7 +979,9 @@
                 'public/supply_chain_icon_2.png', 
                 'public/supply_chain_icon_3.png',
                 'public/supply_chain_icon_4.png',
-                'public/supply_chain_icon_4b.png'
+                'public/supply_chain_4bc.png',
+                'public/supply_chain_icon_3.png',
+                'public/supply_chain_4bc.png'
             ];
             
             locations.forEach((loc, index) => {
