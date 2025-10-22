@@ -412,7 +412,7 @@
         .desc-title {
             font-weight: 600;
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.1rem;
             color: var(--text-primary);
             text-align: left;
         }
@@ -612,20 +612,12 @@
                 <div class="section-content-inner">
                     <div class="materials-scroll">
                         <div class="material-card">
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;font-weight:600;font-size:1.1rem;">{{material1_placement}}</span>
-                            </div>
-                            <div style="margin-top:1rem;">
-                                <div class="desc-text">{{material1_composition}}</div>
-                            </div>
+                            <div class="desc-title">Main fabric</div>
+                            <div class="desc-text">{{material1_composition}}</div>
                         </div>
                         <div class="material-card">
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <span class="detail-value" style="text-align:left;font-weight:600;font-size:1.1rem;">{{material2_placement}}</span>
-                            </div>
-                            <div style="margin-top:1rem;">
-                                <div class="desc-text">{{material2_composition}}</div>
-                            </div>
+                            <div class="desc-title">Hood lining</div>
+                            <div class="desc-text">{{material2_composition}}</div>
                         </div>
                     </div>
                 </div>
@@ -644,14 +636,14 @@
                     <div class="desc-care-scroll">
                         <div class="desc-care-card">
                             <div class="desc-title">Care Instructions</div>
-                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;">
+                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;margin-top:0.1rem;">
                                 <img src="public/care_icon.png" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
                                 <div class="desc-text" style="text-align:left;">{{care_instructions}}</div>
                             </div>
                         </div>
                         <div class="desc-care-card">
                             <div class="desc-title">Extended Care Instructions</div>
-                            <div class="desc-text">{{care_instructions_extended}}</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">{{care_instructions_extended}}</div>
                         </div>
                     </div>
                 </div>
@@ -747,7 +739,7 @@
                     <div class="materials-scroll">
                         <div class="material-card">
                             <div class="desc-title">Product Information</div>
-                            <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
+                            <div style="display:flex;flex-direction:column;gap:0.2rem;margin-top:0.1rem;">
                                 <div style="display:flex;justify-content:space-between;align-items:center;">
                                     <span class="detail-value" style="text-align:left;">Product Code:</span>
                                     <span class="detail-value" style="text-align:right;">{{product_code}}</span>
@@ -772,7 +764,7 @@
                         </div>
                         <div class="material-card">
                             <div class="desc-title">Import Information</div>
-                            <div class="desc-text">{{importer}}</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">{{importer}}</div>
                         </div>
                     </div>
                 </div>
