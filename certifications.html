@@ -78,9 +78,9 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.1);
         }
         .certification-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 0.75rem;
+            max-width: 100px;
+            height: 64px;
+            margin: 0 auto 0.5rem;
             display: block;
             object-fit: contain;
             transition: transform 0.2s ease, opacity 0.2s ease;
@@ -141,8 +141,8 @@
                 padding: 1rem;
             }
             .certification-icon {
-                width: 60px;
-                height: 60px;
+                max-width: 80px;
+                height: 51px;
             }
             .certification-title {
                 font-size: 1rem;
@@ -158,43 +158,46 @@
         <div class="certifications-grid">
             <h2 style="grid-column: 1 / -1; text-align: center; margin-bottom: 1rem; color: var(--text-primary); font-size: 1.3rem;">Product & Material Certificates</h2>
             <div class="certification-card">
-                <a href="public/ceres-cert.pdf" target="_blank"><img src="public/product_cert_4.png" alt="Organic Content Standard" class="certification-icon"></a>
+                <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 0.5rem;">
+                    <a href="public/ceres-cert.pdf" target="_blank"><img src="public/ocs-100.png" alt="OCS 100" class="certification-icon" style="max-width: 100px; height: 64px;"></a>
+                    <a href="public/ceres-cert.pdf" target="_blank"><img src="public/ocs-blended.png" alt="OCS Blended" class="certification-icon" style="max-width: 100px; height: 64px;"></a>
+                </div>
                 <h3 class="certification-title">Organic Content Standard</h3>
                 <p class="certification-description">Verifies and tracks organic materials from certified farms through the full supply chain. Applies to non-food products with at least 5% certified organic content: OCS 100 (≥95%) and OCS Blended (5–94%). Focuses solely on verifying organic material content and chain of custody, without assessing quality, safety, environmental, or social performance.</p>
             </div>
             <div class="certification-card">
-                <a href="public/ceres-cert.pdf" target="_blank"><img src="public/product_cert_5.png" alt="Recycled Content Standard" class="certification-icon"></a>
+                <a href="public/ceres-cert.pdf" target="_blank"><img src="public/rcs-blended.png" alt="Recycled Content Standard" class="certification-icon"></a>
                 <h3 class="certification-title">Recycled Content Standard</h3>
                 <p class="certification-description">Confirms products contain defined percentages of recycled materials from pre- and post-consumer sources, requiring at least 5% recycled content. Certification assesses manufacturing data, chain-of-custody procedures, and mass-balance calculations per ISO 14021. Applicable to textiles, building materials, packaging, and electronics.</p>
             </div>
             <div class="certification-card">
-                <a href="https://www.oeko-tex.com/en/detail?number=" target="_blank"><img src="public/product_cert_1.png" alt="Oekotex Made in Green" class="certification-icon"></a>
+                <a href="https://www.oeko-tex.com/en/detail?number=" target="_blank"><img src="public/oekotex-tshirt.png" alt="Oekotex Made in Green" class="certification-icon"></a>
                 <h3 class="certification-title">OEKO-TEX® MADE IN GREEN</h3>
                 <p class="certification-description">A traceable label for textiles and leather tested for harmful substances, produced sustainably, and under safe, socially responsible conditions. Requires OEKO-TEX® STANDARD 100 or LEATHER STANDARD certification, STeP-certified production facilities, and full supply chain traceability via a unique ID or QR code.</p>
             </div>
             <div class="certification-card">
-                <a href="public/oekotex100-cert.pdf" target="_blank"><img src="public/product_cert_2.png" alt="Oekotex 100" class="certification-icon"></a>
+                <a href="public/oekotex100-cert.pdf" target="_blank"><img src="public/oekotex-100.png" alt="Oekotex 100" class="certification-icon"></a>
                 <h3 class="certification-title">OEKO-TEX® STANDARD 100</h3>
                 <p class="certification-description">Tests and certifies textiles for over 1,000 harmful substances with limits stricter than legal standards. Applies to all production stages and components, including accessories. Organized into four product classes based on skin contact, with Class I (baby products) having the strictest criteria.</p>
             </div>
             <div class="certification-card">
-                <a href="https://petaapprovedvegan.peta.org/search-peta-approved-vegan/?_search=Texet" target="_blank"><img src="public/product_cert_3.png" alt="PETA-Approved Vegan" class="certification-icon"></a>
+                <a href="https://petaapprovedvegan.peta.org/search-peta-approved-vegan/?_search=Texet" target="_blank"><img src="public/peta-vegan.png" alt="PETA-Approved Vegan" class="certification-icon"></a>
                 <h3 class="certification-title">PETA-Approved Vegan</h3>
                 <p class="certification-description">Verifies products contain no animal-derived ingredients and were not tested on animals. Certification is based on company self-reporting and supplier declarations rather than third-party audits. Applies to fashion, cosmetics, food, and household goods, with annual certification renewal required.</p>
             </div>
             <h2 style="grid-column: 1 / -1; text-align: center; margin: 2rem 0 1rem 0; color: var(--text-primary); font-size: 1.3rem;">Company Certificates</h2>
             <div class="certification-card">
-                <a href="public/bsci-cert.pdf" target="_blank"><img src="public/supply_chain_cert_1.png" alt="BSCI" class="certification-icon"></a>
+                <a href="public/bsci-cert.pdf" target="_blank"><img src="public/amfori-bsci.png" alt="BSCI" class="certification-icon"></a>
                 <h3 class="certification-title">amfori BSCI</h3>
                 <p class="certification-description">A global audit program improving labor and social conditions across supply chains. Assesses 13 Performance Areas based on ILO conventions, including fair pay, working hours, health and safety, and environmental protection. Facilities are audited every two years and rated from A to E.</p>
             </div>
             <div class="certification-card">
-                <a href="public/iso9001-cert.pdf" target="_blank"><img src="public/supply_chain_cert_2.png" alt="ISO9001:2015" class="certification-icon"></a>
-                <h3 class="certification-title">ISO 9001:2015</h3>
+                <a href="public/iso9001-cert.pdf" target="_blank"><img src="public/iso9001-2015.png" alt="ISO9001:2015" class="certification-icon"></a>
+                <h3 class="certification-title">ISO 9001</h3>
                 <p class="certification-description">Specifies requirements for a quality management system ensuring consistent product and service quality. Built on seven principles including customer focus, leadership, and continuous improvement. Organizations must document processes, assign responsibilities, and perform regular internal audits and management reviews.</p>
             </div>
             <div class="certification-card">
-                <a href="public/step-cert.pdf" target="_blank"><img src="public/supply_chain_cert_3.png" alt="Oekotex STeP" class="certification-icon"></a>
+                <a href="public/step-cert.pdf" target="_blank"><img src="public/oekotex-step.png" alt="Oekotex STeP" class="certification-icon"></a>
                 <h3 class="certification-title">OEKO-TEX® STeP</h3>
                 <p class="certification-description">Certifies textile and leather production facilities for sustainable, socially responsible manufacturing. Evaluates six areas: chemical management, environmental performance, environmental management, social responsibility, health and safety, and quality management. Combines self-assessment with independent audits, scoring facilities on a three-tier scale. Recognized by and compatible with other certifications like BSCI, SA8000, ISO 14001, and ISO 9001.</p>
             </div>

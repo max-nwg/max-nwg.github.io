@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light only">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="description" content="Product information for UM T-Shirt Regular Fit<br>White, 2XS">
+    <title>Product ID</title>
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #34495E;
+            --accent: #E67E22;
+            --bg-color: #fff;
+            --text-primary: #2C3E50;
+            --text-secondary: #7F8C8D;
+            --border-color: #ECF0F1;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow: 0 2px 4px rgba(0,0,0,0.05);
+            --radius: 0.5rem;
+            --max-width-mobile: 100vw;
+            --max-width-tablet: 64rem;
+            --max-width-desktop: 80rem;
+        }
+        
+        /* Force light mode while preserving original colors */
+        html {
+            color-scheme: light only;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-y: scroll;
+        }
+        
+        /* Override any system dark mode preferences */
+        @media (prefers-color-scheme: dark) {
+            html, body, * {
+                color-scheme: light only !important;
+            }
+            
+            body {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section, .product-section {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section-header {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+            
+            .section-content {
+                background: var(--bg-color) !important;
+                color: var(--text-primary) !important;
+            }
+        }
+        
+        /* Container and Layout */
+        .container {
+            width: 100vw;
+            max-width: var(--max-width-mobile);
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Sections - Base Styles */
+        .section, .product-section {
+            background: none !important;
+            border-radius: 0;
+            margin: 0;
+            padding: 0.15rem 0;
+            border: none;
+            border-top: 1px solid var(--border-color);
+            max-width: 100%;
+        }
+        
+        .section:first-child, .product-section:first-child { 
+            border-top: none; 
+        }
+        
+        /* Section Headers */
+        .section {
+            position: relative;
+            margin: 0;
+            cursor: pointer;
+            background: var(--bg-color) !important;
+            box-shadow: var(--shadow-sm);
+            border-radius: 0;
+            border-bottom: 1px solid var(--border-color);
+            max-width: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+
+        
+
+        
+        .toggle-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        
+        /* Hidden checkbox for CSS-only accordion */
+        .section-toggle {
+            position: absolute;
+            height: 88px;
+            width: 100%;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            z-index: 10;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .section-header {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 0;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            user-select: none;
+            position: relative;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Section Content */
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease-out, 
+                        opacity 0.25s ease-out;
+        }
+        
+        /* When checkbox is checked, expand content */
+        .section-toggle:checked ~ .section-content {
+            max-height: 1000px;
+            opacity: 1;
+        }
+        
+        /* When checkbox is checked, rotate chevron */
+        .section-toggle:checked ~ .section-header .toggle-icon {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
+        .section-content-inner {
+            padding: 0.15rem 0.5rem;
+            max-width: 100%;
+        }
+        
+        /* Scrollable Cards */
+        .materials-scroll, .desc-care-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 0.5rem;
+            max-width: 100%;
+        }
+        
+        .material-card, .desc-care-card {
+            width: 100%;
+            min-width: 80vw;
+            max-width: 340px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            flex: 0 0 auto;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Supply Chain Steps */
+        .supply-chain-steps-vertical { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.25rem; 
+            margin: 0; 
+            max-width: 100%;
+        }
+        
+        .supply-chain-step-vertical { 
+            display: flex; 
+            align-items: center; 
+            background: #f8f9fa; 
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1); 
+            border-radius: 12px; 
+            padding: 0.75rem; 
+            gap: 0.75rem; 
+            margin: 0; 
+            border: 1px solid #e9ecef; 
+            min-height: 60px;
+            box-sizing: border-box;
+        }
+        
+        .supply-chain-step-vertical .detail-label { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            flex: 1;
+            line-height: 1;
+        }
+        
+        .supply-chain-step-vertical .detail-label img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+        
+        .supply-chain-step-vertical .detail-label span {
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            font-weight: 400;
+            justify-content: flex-start;
+        }
+        
+        .supply-chain-step-vertical .detail-value { 
+            display: flex; 
+            align-items: center; 
+            justify-content: flex-end;
+            text-align: right;
+            line-height: 1;
+        }
+        
+        /* Map Container */
+        .map-container { 
+            height: 300px; 
+            border-radius: var(--radius); 
+            margin: 1rem 0; 
+            border: 1px solid var(--border-color); 
+            position: relative;
+            cursor: pointer;
+            max-width: 100%;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: var(--radius);
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 1000;
+        }
+        
+        .map-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .map-overlay::after {
+            content: "Tap to interact";
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            pointer-events: none;
+        }
+        
+        /* Product Section Specific */
+        .product-section .product-info {
+            padding: 0.15rem 0.5rem;
+            margin-bottom: 0.5rem;
+            max-width: 100%;
+        }
+        
+        .product-section .product-title { 
+            font-size: 1.25rem; 
+            font-weight: 600; 
+            margin-bottom: 0.5rem; 
+        }
+        
+        .product-image-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: flex-start; 
+            gap: 1rem; 
+            padding: 0.15rem 0.5rem;
+            max-width: 100%;
+        }
+        
+        .product-image { 
+            align-self: flex-start; 
+            width: 100%; 
+            max-width: 400px; 
+            height: auto; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow); 
+        }
+        
+        .product-details-inline { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.5rem; 
+            margin-top: 1rem; 
+            width: 100%; 
+        }
+        
+        .product-certifications { 
+            margin: 0.25rem 0 0 0; 
+            justify-content: center; 
+        }
+        
+        /* Icons and Links */
+        .inline-icons-row {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            max-width: 100%;
+        }
+        
+        .inline-icons-row img {
+            height: 60px;
+            width: auto;
+            max-width: 100px;
+            max-height: 60px;
+            flex: 0 0 auto;
+            object-fit: contain;
+        }
+        
+        .inline-icons-row a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        
+        .certification-squares a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .cert-link { 
+            text-align: center; 
+            margin: 0.5rem 0 0.25rem 0; 
+        }
+        
+        .cert-link a { 
+            display: inline-block; 
+            background: #f8f9fa; 
+            border: 1px solid #e9ecef; 
+            border-radius: 12px; 
+            padding: 0.375rem 0.5rem; 
+            text-decoration: none; 
+            color: var(--text-primary); 
+            font-weight: 500; 
+            font-size: 0.75rem; 
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Typography */
+        .detail-value { 
+            color: var(--text-primary); 
+            font-weight: 400; 
+        }
+        
+        .desc-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.1rem;
+            color: var(--text-primary);
+            text-align: left;
+        }
+        
+        .desc-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            text-align: left;
+        }
+        
+        /* Tablet Styles (768px+) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: var(--max-width-tablet);
+                margin: 0 auto;
+                padding: 1rem;
+            }
+            
+            .section, .product-section {
+                border-radius: var(--radius);
+                margin: initial;
+                padding: 0.5rem;
+                background: var(--bg-color);
+                border: 1px solid var(--border-color);
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .section-content-inner, .product-section .product-info, .product-section .product-image-container {
+                padding: 1rem 1.5rem;
+            }
+            
+            .section-header {
+                padding: 1rem 1.5rem;
+                margin: 0.75rem 0;
+            }
+            
+            .section-header {
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .section-content-inner {
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .materials-scroll, .desc-care-scroll {
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .supply-chain-steps-vertical {
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .map-container {
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .inline-icons-row {
+                max-width: var(--max-width-tablet);
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .product-image-container {
+                align-items: center !important;
+            }
+            
+            .product-image {
+                align-self: center !important;
+            }
+            
+            .product-image-container > div {
+                text-align: center !important;
+            }
+            
+            .product-certifications {
+                justify-content: center !important;
+            }
+        }
+        
+        /* Desktop Styles (900px+) */
+        @media (min-width: 900px) {
+            .container {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .section, .product-section {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .section-header {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .section-content-inner {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .materials-scroll, .desc-care-scroll {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .supply-chain-steps-vertical {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .map-container {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .inline-icons-row {
+                max-width: var(--max-width-desktop);
+            }
+            
+            .product-image {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .product-image-container {
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 2rem !important;
+            }
+            
+            .product-image {
+                flex: 0 0 auto;
+                margin: 0 !important;
+            }
+            
+            .product-image-container > div {
+                flex: 1 !important;
+                min-width: 0 !important;
+            }
+            
+            .material-card, .desc-care-card {
+                min-width: 320px;
+                max-width: 340px;
+            }
+        }
+        
+        /* Mobile Card Adjustments */
+        @media (min-width: 600px) {
+            .material-card, .desc-care-card {
+                min-width: 320px;
+                max-width: 340px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Product Section -->
+        <section class="product-section">
+            <div class="product-info">
+                <h1 class="product-title">UM T-Shirt Regular Fit<br>White, 2XS</h1>
+            </div>
+            <div class="product-image-container">
+                <img src="public/3410010.jpg" alt="UM T-Shirt Regular Fit<br>White, 2XS" class="product-image">
+                                    <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;width:100%;">
+                        <div style="text-align:left;width:100%;">
+                            <p style="font-size:1rem;color:var(--text-secondary);line-height:1.5;">Our unisex T-Shirt is made from 100% organic cotton with a soft, breathable feel. The 180 gsm fabric offers a mid-weight construction, ideal for all-season wear. Cut in a regular fit with a classic crew neck.</p>
+                        </div>
+                    <div class="product-certifications inline-icons-row">
+                        <a href="public/ceres-cert.pdf" target="_blank"><img src="public/ocs-100.png" alt="Product Certification 3"></a>
+                        <a href="https://www.oeko-tex.com/en/detail?number=M2AN10UD7" target="_blank"><img src="public/oekotex-tshirt.png" alt="Product Certification 1"></a>
+                        <a href="https://petaapprovedvegan.peta.org/search-peta-approved-vegan/?_search=Texet" target="_blank"><img src="public/peta-vegan.png" alt="Product Certification 2"></a>
+                    </div>
+                    <div class="cert-link">
+                        <a href="certifications.html" target="_blank">Click to read about all certifications</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Material -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="material-toggle">
+            <label for="material-toggle" class="section-header">
+                <span>Material</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Main fabric</div>
+                            <div class="desc-text">100% OCS certified organic cotton<br>Certified by CERES-1725<br>180 gsm</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care Section -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-toggle">
+            <label for="care-toggle" class="section-header">
+                <span>Care</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-care-scroll">
+                        <div class="desc-care-card">
+                            <div class="desc-title">Care Instructions</div>
+                            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:0.5rem;margin-top:0.1rem;">
+                                <img src="public/care-icon60.png" alt="Care Instructions" style="max-height:32px;width:auto;display:block;">
+                                <div class="desc-text" style="text-align:left;">Machine Wash 60°C<br>Do Not Bleach <br>Tumble Low Temp<br>Ironing Medium Temp<br>Do Not Dry Clean</div>
+                            </div>
+                        </div>
+                        <div class="desc-care-card">
+                            <div class="desc-title">Extended Care Instructions</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">Stretch When Wet<br>Wash Inside Out<br>Wash With Similar Colors<br>Reshape While Damp<br>Wash Separately The First Time<br>Care Instructions Exclusive Of Decoration</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Care to Longevity -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="care-longevity-toggle">
+            <label for="care-longevity-toggle" class="section-header">
+                <span>Care to Longevity</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">With the following tips for caring for your clothes, you can extend their life and minimize the environmental impact of the care process.<br>We consciously choose a timeless, neutral design. By taking into account the needs of the wearer and eco-design, in combination with quality materials, you can enjoy optimal longevity.<br><br>- Wash efficiently: Use a full load and select a low-spin setting. Washing at lower temperatures conserves energy and is gentler on fabrics, preserving their quality.<br>- Protect the fabric: Turn clothes inside out before washing. This shields the outer surface, reducing wear and maintaining their appearance.<br>- Air dry for sustainability: Skip the dryer to save energy and minimize fabric damage. Air drying is a gentle, eco-friendly alternative that extends the life of your garments.<br><br>By adopting these practices, you can keep your clothes looking their best while supporting a more sustainable future.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supply Chain -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="supply-chain-toggle">
+            <label for="supply-chain-toggle" class="section-header">
+                <span>Supply Chain</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-section">
+                        <div class="map-container" id="map">
+                            <div class="map-overlay" id="mapOverlay"></div>
+                        </div>
+                        <div class="supply-chain-steps-vertical">
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="public/supply_chain_1.png" alt="Garment Production">
+                                    <span>Garment<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Lariz Fashion Ltd.<br>Bandar, Bangladesh</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="public/supply_chain_2.png" alt="Fabric Production">
+                                    <span>Fabric<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Fariha Knit Tex Ltd.<br>Narayanganj, Bangladesh</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="public/supply_chain_3.png" alt="Yarn Production">
+                                    <span>Yarn<br>Production</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Ludhiana<br>Punjab, India</div>
+                            </div>
+                            <div class="supply-chain-step-vertical">
+                                <div class="detail-label">
+                                    <img src="public/supply_chain_4.png" alt="Raw Material">
+                                    <span>Raw<br>Material</span>
+                                </div>
+                                <div class="detail-value" style="text-align:right;">Samana<br>Punjab, India</div>
+                            </div>
+                        </div>
+                        <div class="certification-squares inline-icons-row" style="margin:0.5rem 0 0 0;justify-content:center;">
+                            <a href="public/bsci-cert.pdf" target="_blank"><img src="public/amfori-bsci.png" alt="Cert 1"></a>
+                            <a href="public/iso9001-cert.pdf" target="_blank"><img src="public/iso9001-2015.png" alt="Cert 2"></a>
+                            <a href="public/step-cert.pdf" target="_blank"><img src="public/oekotex-step.png" alt="Cert 3"></a>
+                        </div>
+                        <div style="text-align:center;">
+                            <small style="color:var(--text-secondary);font-size:0.75rem;">Certifications apply to the factory Lariz Fashion Ltd. only</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="product-details-toggle">
+            <label for="product-details-toggle" class="section-header">
+                <span>Product Details</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="materials-scroll">
+                        <div class="material-card">
+                            <div class="desc-title">Product Information</div>
+                            <div style="display:flex;flex-direction:column;gap:0.1rem;margin-top:0.1rem;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Product Code:</span>
+                                    <span class="detail-value" style="text-align:right;">3410010-100-2</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Available Sizes:</span>
+                                    <span class="detail-value" style="text-align:right;">2XS-5XL</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">HS/TARIC Code:</span>
+                                    <span class="detail-value" style="text-align:right;">6109100010</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">EAN Code:</span>
+                                    <span class="detail-value" style="text-align:right;">5404045500009</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;">
+                                    <span class="detail-value" style="text-align:left;">Purchase Order:</span>
+                                    <span class="detail-value" style="text-align:right;">C555161</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="material-card">
+                            <div class="desc-title">Import Information</div>
+                            <div class="desc-text" style="margin-top:0.1rem;">Texet Benelux NV<br>Nieuwlandlaan 97<br>3200 Aarschot, Belgium<br>UM@texet.be</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Cycle Assessment -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="lca-toggle">
+            <label for="lca-toggle" class="section-header">
+                <span>Life Cycle Assessment</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="supply-chain-steps-vertical">
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="public/lca_carbon.png" alt="Carbon Emission">
+                                <span>Carbon<br>Emission</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">1.04 kg CO₂<br>emission per garment</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="public/lca_water.png" alt="Water Use">
+                                <span>Water<br>Use</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">900 liters<br>water per garment</div>
+                        </div>
+                        <div class="supply-chain-step-vertical">
+                            <div class="detail-label">
+                                <img src="public/lca_energy.png" alt="Energy Consumption">
+                                <span>Energy<br>Consumption</span>
+                            </div>
+                            <div class="detail-value" style="text-align:right;">3.26 kWh<br>energy per garment</div>
+                        </div>
+                    </div>
+                    <div class="cert-link">
+                        <a href="lca.html" target="_blank">Click for more LCA information</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repair -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="repair-toggle">
+            <label for="repair-toggle" class="section-header">
+                <span>Repair</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">Designed for Repairability<br>This garment is crafted with repairability at its core. Its modular components, standardized seams, and accessible fastenings make it easy to repair in case of wear or damage.<br><br>Repair Options<br>Users can perform basic fixes themselves using a standard repair kit.<br>Opt for certified local tailoring services for more complex repairs.<br><br>Benefits of Repair<br>Choosing repair over replacement extends the product’s lifecycle and maximizes your return on investment in workwear. By maintaining your garment, you contribute to sustainability and reduce waste.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End of Life -->
+        <section class="section">
+            <input type="checkbox" class="section-toggle" id="end-of-life-toggle">
+            <label for="end-of-life-toggle" class="section-header">
+                <span>End of Life</span>
+                <i class="fa fa-chevron-down toggle-icon"></i>
+            </label>
+            <div class="section-content">
+                <div class="section-content-inner">
+                    <div class="desc-text">At the end of its useful life, this garment should be handled in accordance with your country’s waste management regulations. Always follow local guidelines for textile disposal or recycling. Where available, return the item to an authorized collection point or designated drop-off location for professional processing.<br><br>The product is designed to facilitate dismantling.<br><br>Ensure all parts are clean and dry before disposal or recycling.<br> supports circularity in the textile sector.<br><br>♻️ Labels & Hangtag Components<br>Inner Labels<br>All our inner labels are made from recycled polyester.<br><br>Hangtag Cord<br>The cord attached to the FSC-certified paper hangtag is made from 100% organic cotton.<br><br>➤ Recycling Advice<br>Both the recycled polyester labels and the organic cotton cord can be disposed of with textile waste, if accepted by your local waste management service.<br><br>📌 Note: The paper hangtag should be disposed of with paper recycling, not textile waste.<br><br>Thank you for recycling.<br>Proper end-of-life handling not only reduces environmental impact but also supports circularity in the textile sector. By recycling, you help give materials a second life and enable the reuse of valuable resources in the creation of new textiles — thank you for making a difference.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+        });
+
+        function initMap() {
+            const locations = [
+                { lat: 23.6896, lon: 90.5510, text: "<strong>Garment production</strong><br>Lariz Fashion Ltd.<br>Bandar, Bangladesh" },
+                { lat: 23.6170, lon: 90.4802, text: "<strong>Fabric production</strong><br>Fariha Knit Tex Ltd.<br>Narayanganj, Bangladesh" },
+                { lat: 30.9052, lon: 75.8539, text: "<strong>Yarn</strong><br>Ludhiana<br>Punjab, India" },
+                { lat: 30.1549, lon: 76.1978, text: "<strong>Cotton material</strong><br>Samana<br>Punjab, India" },
+            ];
+            
+            const map = L.map('map', { 
+                zoomControl: false,
+                dragging: false,
+                touchZoom: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false
+            }).setView([28, 95], 3);
+            
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+            
+            const zoomControl = L.control.zoom({ position: 'topright' }).addTo(map);
+            zoomControl._container.style.pointerEvents = 'none';
+            zoomControl._container.style.opacity = '0.5';
+            
+            const connections = [
+                { start: 3, end: 2 },
+                { start: 2, end: 1 },
+                { start: 1, end: 0 },
+            ];
+            
+            connections.forEach(conn => {
+                const start = locations[conn.start];
+                const end = locations[conn.end];
+                
+                L.polyline([[start.lat, start.lon], [end.lat, end.lon]], {
+                    color: '#1a1a1a',
+                    weight: 2.5,
+                    opacity: 0.8,
+                    dashArray: '8, 8'
+                }).addTo(map);
+            });
+            
+            const iconPaths = [
+                'public/supply_chain_1.png',
+                'public/supply_chain_2.png', 
+                'public/supply_chain_3.png',
+                'public/supply_chain_4.png',
+            ];
+            
+            locations.forEach((loc, index) => {
+                const icon = L.divIcon({
+                    html: `<img src="${iconPaths[index]}" style="width:32px;height:32px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));border-radius:50%;">`,
+                    className: 'custom-marker',
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 16]
+                });
+                
+                L.marker([loc.lat, loc.lon], { icon })
+                    .addTo(map)
+                    .bindPopup(loc.text, {
+                        className: 'custom-popup',
+                        maxWidth: 300,
+                        closeButton: false
+                    });
+            });
+            
+            // Add styles
+            const style = document.createElement('style');
+            style.textContent = `
+                .custom-marker {
+                    background: transparent !important;
+                    border: none !important;
+                }
+                .custom-popup .leaflet-popup-content-wrapper {
+                    background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 0;
+                }
+                .custom-popup .leaflet-popup-content {
+                    margin: 12px 16px; font-size: 14px; line-height: 1.4;
+                }
+                .custom-popup .leaflet-popup-tip {
+                    background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Map interaction handling
+            const mapContainer = document.getElementById('map');
+            const mapOverlay = document.getElementById('mapOverlay');
+            let mapEnabled = false;
+
+            mapContainer.addEventListener('click', function() {
+                if (!mapEnabled) {
+                    // Enable map interaction
+                    map.dragging.enable();
+                    map.touchZoom.enable();
+                    map.scrollWheelZoom.enable();
+                    map.doubleClickZoom.enable();
+                    map.boxZoom.enable();
+                    map.keyboard.enable();
+                    
+                    // Hide overlay
+                    mapOverlay.classList.add('hidden');
+                    mapEnabled = true;
+                    
+                    // Enable zoom control
+                    zoomControl._container.style.pointerEvents = 'auto';
+                    zoomControl._container.style.opacity = '1';
+                }
+            });
+
+            // Disable map interaction when clicking outside
+            document.addEventListener('click', function(e) {
+                if (mapEnabled && !mapContainer.contains(e.target)) {
+                    // Disable map interaction
+                    map.dragging.disable();
+                    map.touchZoom.disable();
+                    map.scrollWheelZoom.disable();
+                    map.doubleClickZoom.disable();
+                    map.boxZoom.disable();
+                    map.keyboard.disable();
+                    
+                    // Show overlay
+                    mapOverlay.classList.remove('hidden');
+                    mapEnabled = false;
+                    
+                    // Disable zoom control
+                    zoomControl._container.style.pointerEvents = 'none';
+                    zoomControl._container.style.opacity = '0.5';
+                }
+            });
+        }
+        
+    </script>
+</body>
+</html>
