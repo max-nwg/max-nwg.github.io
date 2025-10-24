@@ -24,7 +24,7 @@ function initMap(iconPaths) {
         doubleClickZoom: false,
         boxZoom: false,
         keyboard: false
-    }).setView([28, 75], 2);
+    }).setView([28, 65], 2);
     
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
