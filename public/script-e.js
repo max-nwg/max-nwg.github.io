@@ -1,9 +1,12 @@
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initMap();
+    // iconPaths will be provided by the template
+    if (typeof iconPaths !== 'undefined') {
+        initMap(iconPaths);
+    }
 });
 
-function initMap() {
+function initMap(iconPaths) {
     const locations = [
         { lat: 23.6896, lon: 90.5510, text: "<strong>Garment production</strong><br>Lariz Fashion Ltd.<br>Bandar, Bangladesh" },
         { lat: 23.6170, lon: 90.4802, text: "<strong>Fabric production</strong><br>Fariha Knit Tex Ltd.<br>Narayanganj, Bangladesh" },
@@ -19,7 +22,7 @@ function initMap() {
         doubleClickZoom: false,
         boxZoom: false,
         keyboard: false
-    }).setView([28, 95], 3);
+    }).setView([28, 90], 4);
     
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
@@ -48,12 +51,7 @@ function initMap() {
         }).addTo(map);
     });
     
-    const iconPaths = [
-        '{{supply_chain_1}}',
-        '{{supply_chain_2}}', 
-        '{{supply_chain_3}}',
-        '{{supply_chain_4}}',
-    ];
+    // iconPaths are now passed as parameter from the template
     
     locations.forEach((loc, index) => {
         const icon = L.divIcon({
