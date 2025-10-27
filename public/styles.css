@@ -514,6 +514,12 @@ body {
         max-width: var(--max-width-desktop);
     }
     
+    .inline-icons-row img {
+        height: 64px;
+        max-width: 108px;
+        max-height: 64px;
+    }
+    
     .product-image {
         display: block;
         margin-left: auto;
