@@ -512,6 +512,7 @@ body {
     
     .inline-icons-row {
         max-width: var(--max-width-desktop);
+        height: 64px;
     }
     
     .inline-icons-row img {
